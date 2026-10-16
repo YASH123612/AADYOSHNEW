@@ -1,0 +1,10 @@
+backend/data/
+.vercel/
+.env*
+__pycache__/
+*.tmp
+exports/
+*.db
+*.db-shm
+*.db-wal
+node_modules/

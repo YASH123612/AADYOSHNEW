@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Delete Account &mdash; aadyosh</title>
+<meta name="description" content="Request permanent deletion of your aadyosh account and personal data." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+</head>
+<body class="anim-page">
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+      <img class="logo-word-img" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <div class="nav-item" data-menu="programs">
+        <button class="nav-link">Programs <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></button>
+        <div class="mega">
+          <div class="mega-tabs" id="megaTabs">
+            <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
+            <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+          </div>
+          <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
+          <div class="mega-footer">
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects &middot; Rubric evaluation &middot; Career outcomes</span>
+            <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-link" href="features.html">Features</a>
+      <a class="nav-link" href="campus-ambassador.html">Campus Ambassador</a>
+      <a class="nav-link" href="reviews.html">Reviews</a>
+      <a class="nav-link" href="careers.html">Careers</a>
+      <a class="nav-link" href="support.html">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#signin" class="btn btn-primary btn-sm" id="signInBtn"><span class="label-full">Sign In</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</header>
+<!-- ================= PAGE HERO ================= -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Delete Your <span class="highlight">Account</span></h1>
+    <p class="lead">Ask us to permanently remove your account and personal data.</p>
+  </div>
+</section>
+
+<!-- ================= DOCUMENT ================= -->
+<section class="legal-wrap">
+  <div class="container">
+    <article class="legal-doc">
+      <div class="legal-note"><i class="fa-solid fa-circle-info" style="margin-right:6px;"></i>This is a starter policy written to match how this site works today. Replace the bracketed details with your real business information and have a qualified legal professional review it before you rely on it.</div>
+      <p class="meta">Last updated: 18 September 2026</p>
+
+      <h2 class="first">1. Important</h2>
+      <p>Account deletion is permanent. Once it is complete, we cannot restore your access or recover your data, except where we are required to keep certain records by law. Download anything you want to keep &mdash; certificates, project files, notes &mdash; before you request deletion.</p>
+
+      <h2>2. How to delete your account</h2>
+      <p>aadyosh accounts are created and signed in through our authentication provider, Clerk. We do not yet offer a self-service "delete account" button inside your account settings, so please use the form below:</p>
+      <ul>
+        <li><strong>1. Request:</strong> submit the form below from the email address on your account.</li>
+        <li><strong>2. Verify:</strong> we confirm it is really you, usually by replying to that email.</li>
+        <li><strong>3. Delete:</strong> we complete the deletion within 30 days and email you when it is done.</li>
+      </ul>
+
+      <h2>3. What gets deleted</h2>
+      <ul>
+        <li>Your profile, sign-in, and session data held with Clerk.</li>
+        <li>Your learning progress, enrolments, and any project submissions tied to your account.</li>
+        <li>Your entries in our roadmap, support, Campus Captain, and deletion-request records, once the deletion is processed.</li>
+        <li>Access to program content, recordings, and certificates tied to the account.</li>
+      </ul>
+
+      <h2>4. What we may retain</h2>
+      <p>Some information may be kept for a limited time after deletion, only where we have a legal or security reason to:</p>
+      <ul>
+        <li>Payment and invoicing records, where required for tax or accounting purposes.</li>
+        <li>Records needed to show that we acted on your deletion request.</li>
+        <li>Security and fraud-prevention logs.</li>
+      </ul>
+      <p>Retained data is limited to what is necessary and is typically kept for no longer than [12] months, unless the law requires a longer period.</p>
+
+      <h2>5. Need help?</h2>
+      <p>If you have trouble with the form below, or want to check on a request you already submitted, email <a href="mailto:hello@aadyosh.com">hello@aadyosh.com</a> with the subject "Account Deletion Request" from the email address on your account, or use the <a href="support.html">Support</a> page.</p>
+
+      <h2>6. Request account deletion</h2>
+      <form id="deleteForm" style="margin-top:14px;">
+        <div class="form-row">
+          <div class="field"><label for="delName">Full name</label><input type="text" id="delName" placeholder="Your full name" autocomplete="name" required /></div>
+          <div class="field"><label for="delEmail">Account email</label><input type="email" id="delEmail" placeholder="you@example.com" autocomplete="email" required /></div>
+        </div>
+        <div class="field" style="margin-bottom:18px;">
+          <label for="delReason">Reason (optional)</label>
+          <select id="delReason">
+            <option value="">Select a reason</option>
+            <option>I no longer need the account</option>
+            <option>I'm concerned about my privacy</option>
+            <option>I'm switching to another platform</option>
+            <option>I created a duplicate account</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <label class="legal-check"><input type="checkbox" id="delConfirm" required /> <span>I understand that deleting my account is permanent and cannot be undone.</span></label>
+        <button type="submit" class="btn btn-primary">Request deletion <i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+      <div class="form-success" id="deleteSuccess" role="status">
+        <div class="ic"><i class="fa-solid fa-check"></i></div>
+        <h3 style="font-size:20px;margin-bottom:10px;">Request received</h3>
+        <p style="color:var(--ink-500);font-size:14px;">We'll email you to verify it's you, then complete the deletion. Questions? Write to <a href="mailto:hello@aadyosh.com">hello@aadyosh.com</a>.</p>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+          <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+        </a>
+        <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
+        <div class="footer-tags"><span>Company Reg. No. &mdash; add yours</span><span>GSTIN &mdash; add yours</span></div>
+      </div>
+      <div class="footer-col">
+        <h5>Who we are</h5>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="campus-ambassador.html">Campus Ambassador</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Quick links</h5>
+        <ul>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="refund-policy.html">Refunds</a></li>
+          <li><a href="return-policy.html">Program Changes</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="delete-account.html">Delete Account</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact us</h5>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> aadyosh. All rights reserved.</span>
+      <div class="links"><a href="#">Sitemap</a><a href="terms-and-conditions.html">Terms</a><a href="privacy-policy.html">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= CHAT WIDGET ================= -->
+<div class="chat-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-head"><i class="fa-solid fa-wand-magic-sparkles"></i> Ady &middot; aadyosh Copilot</div>
+    <div class="chat-panel-body" id="chatBody">
+      <div class="chat-msg">&#128075; Hi! I'm Ady. Ask me about programs, pricing, certificates, or careers.</div>
+    </div>
+    <div class="chat-panel-foot">
+      <input type="text" id="chatInput" placeholder="Type a message..." aria-label="Type a message to Ady" />
+      <button id="chatSend"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
+</div>
+
+<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/site.js?v=10"></script>
+<script>
+document.getElementById("deleteForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  document.getElementById("deleteForm").style.display = "none";
+  document.getElementById("deleteSuccess").classList.add("show");
+});
+</script><script src="assets/js/api.js?v=1"></script>
+<script src="assets/js/auth.js?v=5"></script>
+<script src="assets/js/tawk.js?v=2"></script>
+</body>
+</html>

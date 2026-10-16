@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campus Ambassador — aadyosh</title>
+<meta name="description" content="Become an aadyosh Campus Captain: lead your campus, unlock internships and stipends, and build real community impact." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+      <img class="logo-word-img" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <div class="nav-item" data-menu="programs">
+        <button class="nav-link">Programs <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></button>
+        <div class="mega">
+          <div class="mega-tabs" id="megaTabs">
+            <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
+            <button class="mega-tab" data-cat="ee"><i class="fa-solid fa-bolt"></i>Electrical &amp; Electronics <span class="count">5</span></button>
+            <button class="mega-tab" data-cat="mech"><i class="fa-solid fa-gears"></i>Mechanical <span class="count">3</span></button>
+            <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+            <button class="mega-tab" data-cat="health"><i class="fa-solid fa-heart-pulse"></i>Healthcare &amp; Life Sciences <span class="count">3</span></button>
+          </div>
+          <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
+          <div class="mega-footer">
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Rubric evaluation · Career outcomes</span>
+            <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-link" href="features.html">Features</a>
+      <a class="nav-link" href="copilot.html"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--brand-500)" aria-hidden="true"></i> Copilot</a>
+      <a class="nav-link active" href="campus-ambassador.html">Campus Ambassador</a>
+      <a class="nav-link" href="reviews.html">Reviews</a>
+      <a class="nav-link" href="careers.html">Careers</a>
+      <a class="nav-link" href="support.html">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#signin" class="btn btn-primary btn-sm" id="signInBtn"><span class="label-full">Sign In</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO + FORM ================= -->
+<section class="amb-hero">
+  <div class="container amb-hero-grid">
+    <div>
+      <span class="eyebrow"><i class="fa-solid fa-earth-asia"></i> Pan-India rollout · Merit shortlisting</span>
+      <h1 style="font-size:clamp(30px,4.2vw,48px);margin:20px 0 16px;color:var(--ink-900);">Lead Your Campus. <span class="highlight">Unlock</span> Internships + Stipends.</h1>
+      <p style="color:var(--ink-500);font-size:16px;max-width:480px;">A structured program for high-intent students who can execute with integrity — build reach, build community, and drive measurable outcomes.</p>
+
+      <div class="amb-benefit-grid">
+        <div class="amb-benefit"><div class="ic"><i class="fa-solid fa-sack-dollar"></i></div><div><h4>Performance stipends</h4><p>Earn on verified impact, not hype.</p></div></div>
+        <div class="amb-benefit"><div class="ic"><i class="fa-solid fa-unlock-keyhole"></i></div><div><h4>Priority opportunities</h4><p>Internships + program access for top captains.</p></div></div>
+        <div class="amb-benefit"><div class="ic"><i class="fa-solid fa-star"></i></div><div><h4>Merch + recognition</h4><p>Badges, certificates, spotlight features.</p></div></div>
+        <div class="amb-benefit"><div class="ic"><i class="fa-solid fa-people-group"></i></div><div><h4>Establish a chapter</h4><p>Create a real community on your campus.</p></div></div>
+      </div>
+    </div>
+
+    <div class="app-form-card">
+      <span class="eyebrow" style="margin-bottom:10px;">Application</span>
+      <h3 style="font-size:22px;margin-bottom:22px;">Become a Campus Captain</h3>
+
+      <form id="ambForm">
+        <div class="form-row">
+          <div class="field"><label for="fullName">Full Name *</label><input type="text" id="fullName" placeholder="Enter your full name" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="email">Email *</label><input type="email" id="email" placeholder="you@example.com" required /></div>
+          <div class="field"><label for="phone">Phone *</label><input type="tel" id="phone" placeholder="10-digit number" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="college">College Name *</label><input type="text" id="college" placeholder="Enter your college name" required /></div>
+          <div class="field"><label for="referral">Referred By (optional)</label><input type="text" id="referral" placeholder="Executive / guide name" /></div>
+        </div>
+        <div class="field" style="margin-bottom:22px;">
+          <label>Graduation Year *</label>
+          <div class="year-pills" role="radiogroup" aria-label="Graduation year">
+            <button type="button" class="year-pill active" role="radio" aria-checked="true" data-year="2026">2026</button>
+            <button type="button" class="year-pill" role="radio" aria-checked="false" data-year="2027">2027</button>
+            <button type="button" class="year-pill" role="radio" aria-checked="false" data-year="2028">2028</button>
+            <button type="button" class="year-pill" role="radio" aria-checked="false" data-year="2029">2029</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit application <i class="fa-solid fa-arrow-right"></i></button>
+        <p class="form-consent">By submitting, you agree to be contacted by aadyosh about the Campus Captain program.</p>
+      </form>
+
+      <div class="form-success" id="ambSuccess" role="status">
+        <div class="ic"><i class="fa-solid fa-check"></i></div>
+        <h3 style="font-size:20px;margin-bottom:10px;">Application received</h3>
+        <p style="color:var(--ink-500);font-size:14px;">We'll review your details and follow up over email within a few days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAM IMPACT ================= -->
+<section class="stats-row" style="padding-top:70px;">
+  <div class="container">
+    <div class="section-head center" style="margin-bottom:36px;">
+      <span class="eyebrow"><i class="fa-solid fa-chart-line"></i> Program impact</span>
+      <h2>A Ladder You Can <span class="highlight">Actually Climb</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="ic"><i class="fa-solid fa-building-columns"></i></div><div class="num">50+</div><div class="lbl">Colleges targeted (Phase 1)</div></div>
+      <div class="stat-card"><div class="ic"><i class="fa-solid fa-user-group"></i></div><div class="num">5000+</div><div class="lbl">Students reached / month</div></div>
+      <div class="stat-card"><div class="ic"><i class="fa-solid fa-star"></i></div><div class="num">25</div><div class="lbl">Top captains shortlisted</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT CAPTAINS DO ================= -->
+<section class="programs">
+  <div class="container">
+    <span class="eyebrow"><i class="fa-solid fa-crown"></i> What captains actually do</span>
+    <h2 style="margin:16px 0 30px;">Simple Responsibilities. <span class="highlight">High Leverage Impact.</span></h2>
+
+    <div class="tab-pill-row" id="ambTabs" role="tablist" aria-label="Ambassador responsibilities">
+      <button class="tab-pill active" id="tab-reach" role="tab" aria-selected="true" aria-controls="ambTabContent" data-tab="reach"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Build Reach</button>
+      <button class="tab-pill" id="tab-community" role="tab" aria-selected="false" aria-controls="ambTabContent" data-tab="community"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Build Community</button>
+      <button class="tab-pill" id="tab-outcomes" role="tab" aria-selected="false" aria-controls="ambTabContent" data-tab="outcomes"><i class="fa-regular fa-square-check" aria-hidden="true"></i> Build Outcomes</button>
+    </div>
+
+    <div class="tab-content-card" id="ambTabContent" role="tabpanel" aria-live="polite">
+      <!-- injected -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= MILESTONES ================= -->
+<section class="how">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow"><i class="fa-solid fa-gift"></i> Milestones &amp; rewards</span>
+    <h2 style="margin:16px 0 14px;">A Clean Ladder. <span class="highlight">Strong Incentives.</span></h2>
+    <p style="color:var(--ink-500);max-width:560px;margin:0 auto 10px;">Compact tiers, verified milestones, tangible perks — targets verified, rewards unlocked after review.</p>
+
+    <div class="tier-rail">
+      <div class="tier-rail-nodes" id="tierRailNodes">
+        <button type="button" class="tier-rail-node" data-tier="bronze" style="--dot-color:var(--bronze); --dot-fill:linear-gradient(135deg,#c98a45,#8a5323);"><span class="tier-rail-dot"></span><span class="tier-rail-label">Bronze &middot; 5+</span></button>
+        <button type="button" class="tier-rail-node" data-tier="silver" style="--dot-color:var(--silver); --dot-fill:linear-gradient(135deg,#9aa4b2,#4d5560);"><span class="tier-rail-dot"></span><span class="tier-rail-label">Silver &middot; 15+</span></button>
+        <button type="button" class="tier-rail-node" data-tier="gold" style="--dot-color:var(--gold); --dot-fill:linear-gradient(135deg,#f8dc86,#c9960c);"><span class="tier-rail-dot"></span><span class="tier-rail-label">Gold &middot; 30+</span></button>
+        <button type="button" class="tier-rail-node" data-tier="platinum" style="--dot-color:var(--brand-500); --dot-fill:linear-gradient(135deg,var(--brand-500),var(--accent-500));"><span class="tier-rail-dot"></span><span class="tier-rail-label">Platinum &middot; 50+</span></button>
+      </div>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier-card bronze">
+        <div class="tier-icon"><i class="fa-solid fa-medal" style="font-size:20px;"></i></div>
+        <div>
+          <div class="tier-label">Tier</div>
+          <div class="tier-name">Bronze</div>
+          <div class="tier-count">5+ verified referrals</div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-perks">
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Captain badge + verification</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Certificate of appreciation</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Starter workshop access</span></div>
+        </div>
+      </div>
+
+      <div class="tier-card silver">
+        <div class="tier-icon"><i class="fa-solid fa-award" style="font-size:20px;"></i></div>
+        <div>
+          <div class="tier-label">Tier</div>
+          <div class="tier-name">Silver</div>
+          <div class="tier-count">15+ verified referrals</div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-perks">
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Everything in Bronze</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Coupon benefits (program-based)</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Letter of recommendation</span></div>
+        </div>
+      </div>
+
+      <div class="tier-card gold">
+        <div class="tier-badge">Most earned</div>
+        <div class="tier-icon"><i class="fa-solid fa-trophy" style="font-size:20px;"></i></div>
+        <div>
+          <div class="tier-label">Tier</div>
+          <div class="tier-name">Gold</div>
+          <div class="tier-count">30+ verified referrals</div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-perks">
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Lead a student chapter</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Merch kit (hoodie + stickers)</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Priority internship shortlisting</span></div>
+        </div>
+      </div>
+
+      <div class="tier-card platinum">
+        <div class="tier-icon"><i class="fa-solid fa-gem" style="font-size:20px;"></i></div>
+        <div>
+          <div class="tier-label">Tier</div>
+          <div class="tier-name">Platinum</div>
+          <div class="tier-count">50+ verified referrals</div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-perks">
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Competitive stipends</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>PPO consideration*</span></div>
+          <div class="tier-perk"><div class="check-pop"><i class="fa-solid fa-check" style="color:#fff;font-size:11px;"></i></div><span>Work with the aadyosh team</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier-footnote">
+      <span class="shield-icon"><i class="fa-solid fa-shield-halved"></i></span>
+      <span>Verification matters — perks are tied to verified referrals to keep the program clean and fair.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SELECTION & ONBOARDING ================= -->
+<section class="programs">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow"><i class="fa-solid fa-list-check"></i> Selection &amp; onboarding</span>
+      <h2>Fast, Structured, <span class="highlight">Merit-Based.</span></h2>
+      <p>No long interviews, no unnecessary steps — optimized for execution.</p>
+    </div>
+    <div class="convert-grid" style="text-align:left;grid-template-columns:repeat(3,1fr);">
+      <div class="convert-card" style="border-color:var(--ink-100);background:var(--white);box-shadow:var(--shadow-sm);">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--brand-600);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px;">1</div>
+        <h4 style="color:var(--ink-900)">Apply</h4>
+        <p style="color:var(--ink-500)">A 60-second form. One unique captain per college.</p>
+      </div>
+      <div class="convert-card" style="border-color:var(--ink-100);background:var(--white);box-shadow:var(--shadow-sm);">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--brand-600);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px;">2</div>
+        <h4 style="color:var(--ink-900)">Shortlist</h4>
+        <p style="color:var(--ink-500)">We check communication, campus activity, and intent.</p>
+      </div>
+      <div class="convert-card" style="border-color:var(--ink-100);background:var(--white);box-shadow:var(--shadow-sm);">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--brand-600);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px;">3</div>
+        <h4 style="color:var(--ink-900)">Onboard</h4>
+        <p style="color:var(--ink-500)">Starter kit, assets, and playbook. First milestone starts right away.</p>
+      </div>
+    </div>
+    <div style="margin-top:30px;background:var(--ink-50);border-radius:var(--radius-lg);padding:22px 26px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-weight:800;font-size:14px;color:var(--ink-900);margin-bottom:4px;">Eligibility</div>
+        <div style="font-size:13px;color:var(--ink-500);">Engineering / Management undergrads · Strong communication · Active on campus · Consistent weekly time</div>
+      </div>
+      <a href="#top" class="btn btn-primary btn-sm">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq">
+  <div class="container faq-grid">
+    <div>
+      <span class="eyebrow on-dark"><i class="fa-solid fa-circle-question"></i> Frequently asked questions</span>
+      <h2 style="color:#fff;margin:18px 0 14px;">Fast Answers. <span style="color:var(--brand-300)">No Confusion.</span></h2>
+      <p style="color:var(--ink-300);font-size:16px;">One accordion open at a time, clean and easy to scan.</p>
+      <div class="faq-tag-row">
+        <span>Limited seats per college</span>
+      </div>
+    </div>
+    <div id="ambFaqList">
+      <div class="faq-item open">
+        <div class="faq-q" role="button" tabindex="0" aria-expanded="true">
+          <div class="ic"><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i></div>
+          <div><h4>Do Campus Captains get paid?</h4></div>
+          <button class="toggle-btn" tabindex="-1" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="faq-a"><p>Yes — stipends and rewards are performance-based and unlock via the verified milestones ladder.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="ic"><i class="fa-solid fa-user-check" aria-hidden="true"></i></div>
+          <div><h4>How do referrals get verified?</h4></div>
+          <button class="toggle-btn" tabindex="-1" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="faq-a"><p>Verification happens through onboarding and internal checks, to prevent spam or duplicate submissions.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="ic"><i class="fa-solid fa-people-group" aria-hidden="true"></i></div>
+          <div><h4>Can multiple students from the same college apply?</h4></div>
+          <button class="toggle-btn" tabindex="-1" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="faq-a"><p>Yes, but only one captain is selected per college for each program cycle.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+          <div class="ic"><i class="fa-regular fa-clock" aria-hidden="true"></i></div>
+          <div><h4>How much time is required weekly?</h4></div>
+          <button class="toggle-btn" tabindex="-1" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="faq-a"><p>Typically 3–5 hours a week — designed to fit alongside academics.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready To Represent aadyosh On Campus?</h2>
+      <p>Apply now — if shortlisted, you'll receive onboarding details and your starter kit.</p>
+      <div class="cta-actions">
+        <a href="#top" class="btn btn-dark">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="index.html" class="btn btn-ghost-light">Back to home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+          <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+        </a>
+        <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
+        <div class="footer-tags"><span>Company Reg. No. — add yours</span><span>GSTIN — add yours</span></div>
+      </div>
+      <div class="footer-col">
+        <h5>Who we are</h5>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="campus-ambassador.html">Campus Ambassador</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Quick links</h5>
+        <ul>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="refund-policy.html">Refunds</a></li>
+          <li><a href="return-policy.html">Return Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="delete-account.html">Delete Account</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact us</h5>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> aadyosh. All rights reserved.</span>
+      <div class="links"><a href="#">Sitemap</a><a href="terms-and-conditions.html">Terms</a><a href="privacy-policy.html">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="chat-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-head"><i class="fa-solid fa-wand-magic-sparkles"></i> Ady · aadyosh Copilot</div>
+    <div class="chat-panel-body" id="chatBody">
+      <div class="chat-msg">👋 Hi! I'm Ady. Ask me about programs, pricing, certificates, or careers.</div>
+    </div>
+    <div class="chat-panel-foot">
+      <input type="text" id="chatInput" placeholder="Type a message..." aria-label="Type a message to Ady" />
+      <button id="chatSend"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
+</div>
+
+<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/site.js?v=10"></script>
+<script>
+/* ---------- graduation year pills ---------- */
+document.querySelectorAll(".year-pill").forEach(p => {
+  p.addEventListener("click", () => {
+    document.querySelectorAll(".year-pill").forEach(x => { x.classList.remove("active"); x.setAttribute("aria-checked", "false"); });
+    p.classList.add("active");
+    p.setAttribute("aria-checked", "true");
+  });
+});
+
+/* ---------- application form submit (mock) ---------- */
+document.getElementById("ambForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  document.getElementById("ambForm").style.display = "none";
+  document.getElementById("ambSuccess").classList.add("show");
+});
+
+/* ---------- responsibilities tabs ---------- */
+const AMB_TABS = {
+  reach: {
+    title: "Build Reach",
+    items: ["Share aadyosh cohorts + internship tracks in groups", "Host a mini-session (online/offline) with a provided kit", "Collect feedback &amp; objections from students"],
+    time: "3–5 hours/week · Flexible · Works alongside academics",
+  },
+  community: {
+    title: "Build Community",
+    items: ["Run a campus WhatsApp/Discord group for learners", "Organize monthly meetups or study circles", "Onboard new members with the starter kit"],
+    time: "2–4 hours/week · Flexible · Ongoing",
+  },
+  outcomes: {
+    title: "Build Outcomes",
+    items: ["Track referred students through enrollment", "Share verified outcomes (placements, certificates) back to HQ", "Flag drop-off points so the program can improve"],
+    time: "1–3 hours/week · Monthly reporting cadence",
+  },
+};
+function renderAmbTab(key) {
+  const t = AMB_TABS[key];
+  document.getElementById("ambTabContent").innerHTML = `
+    <span class="now">Now viewing</span>
+    <h3>${t.title}</h3>
+    <ul class="check-list">${t.items.map(i => `<li><i class="fa-solid fa-circle-check"></i>${i}</li>`).join("")}</ul>
+    <div class="time-box"><div class="lbl">Time commitment</div>${t.time}</div>
+  `;
+}
+document.querySelectorAll("#ambTabs .tab-pill").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#ambTabs .tab-pill").forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+    tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    renderAmbTab(tab.dataset.tab);
+  });
+});
+renderAmbTab("reach");
+
+/* ---------- tier rail (interactive dots) ---------- */
+document.querySelectorAll(".tier-rail-node").forEach(node => {
+  node.addEventListener("click", () => {
+    document.querySelectorAll(".tier-rail-node").forEach(n => n.classList.remove("active"));
+    node.classList.add("active");
+    const card = document.querySelector(".tier-card." + node.dataset.tier);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+});
+
+/* ---------- FAQ accordion ---------- */
+document.querySelectorAll("#ambFaqList .faq-q").forEach(q => {
+  q.addEventListener("click", () => {
+    const item = q.closest(".faq-item");
+    const wasOpen = item.classList.contains("open");
+    document.querySelectorAll("#ambFaqList .faq-item").forEach(i => {
+      i.classList.remove("open");
+      i.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+    });
+    if (!wasOpen) { item.classList.add("open"); q.setAttribute("aria-expanded", "true"); }
+  });
+});
+</script>
+<script src="assets/js/api.js?v=1"></script>
+<script src="assets/js/auth.js?v=5"></script>
+<script src="assets/js/tawk.js?v=2"></script>
+</body>
+</html>

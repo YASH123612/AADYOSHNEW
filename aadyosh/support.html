@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Support — aadyosh</title>
+<meta name="description" content="Need help with aadyosh? Raise a support ticket or reach us directly — we route every request to the right team." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+      <img class="logo-word-img" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <div class="nav-item" data-menu="programs">
+        <button class="nav-link">Programs <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></button>
+        <div class="mega">
+          <div class="mega-tabs" id="megaTabs">
+            <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
+            <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+          </div>
+          <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
+          <div class="mega-footer">
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Rubric evaluation · Career outcomes</span>
+            <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-link" href="features.html">Features</a>
+      <a class="nav-link" href="campus-ambassador.html">Campus Ambassador</a>
+      <a class="nav-link" href="reviews.html">Reviews</a>
+      <a class="nav-link" href="careers.html">Careers</a>
+      <a class="nav-link active" href="support.html">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#signin" class="btn btn-primary btn-sm" id="signInBtn"><span class="label-full">Sign In</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= PAGE HERO ================= -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Need Help? <span class="highlight">Raise A Ticket</span> In Under A Minute.</h1>
+    <p class="lead">Pick a topic, share the details, and we'll route your request to the right team.</p>
+  </div>
+</section>
+
+<!-- ================= CONTACT + TICKET FORM ================= -->
+<section class="amb-hero">
+  <div class="container amb-hero-grid">
+    <div class="contact-lane-card">
+      <h3 style="font-size:19px;margin-bottom:6px;">Reach Us Directly</h3>
+      <p style="color:var(--ink-500);font-size:13px;margin-bottom:8px;">Use the form for the fastest routing. Direct contact is best for urgent cases.</p>
+
+      <div class="contact-lane-item">
+        <div class="ic"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div>
+      </div>
+      <div class="contact-lane-item">
+        <div class="ic"><i class="fa-solid fa-phone"></i></div>
+        <div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div>
+      </div>
+      <div class="contact-lane-item">
+        <div class="ic"><i class="fa-solid fa-location-dot"></i></div>
+        <div><div class="lbl">Location</div><div class="val">Add your office city here</div></div>
+      </div>
+
+      <p class="contact-lane-note"><i class="fa-solid fa-circle-info" style="color:var(--brand-500);margin-right:6px;"></i>Tip: choose the closest topic in the form for faster routing.</p>
+    </div>
+
+    <div class="app-form-card">
+      <h3 style="font-size:22px;margin-bottom:6px;">Submit A Request</h3>
+      <p style="color:var(--ink-500);font-size:13px;margin-bottom:22px;">Routed automatically to the right team. Expected response: within 24–48 hours.</p>
+
+      <form id="supportForm">
+        <div class="field" style="margin-bottom:18px;">
+          <label for="suTopic">Topic</label>
+          <select id="suTopic" required>
+            <option value="">Select a topic</option>
+            <option>Programs &amp; enrollment</option>
+            <option>Payments &amp; billing</option>
+            <option>Certificates</option>
+            <option>Placement support</option>
+            <option>Technical / LMS access</option>
+            <option>Partnerships</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="suName">Full name</label><input type="text" id="suName" placeholder="Your full name" autocomplete="name" required /></div>
+          <div class="field"><label for="suEmail">Email</label><input type="email" id="suEmail" placeholder="you@example.com" autocomplete="email" required /></div>
+        </div>
+        <div class="field" style="margin-bottom:18px;">
+          <label for="suPhone">Phone (optional)</label>
+          <input type="tel" id="suPhone" placeholder="10-digit number" inputmode="numeric" pattern="[0-9]{10}" autocomplete="tel-national" />
+        </div>
+        <div class="field" style="margin-bottom:22px;">
+          <label for="suMessage">Message</label>
+          <textarea id="suMessage" placeholder="Tell us what's going on — the more detail, the faster we can help." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send ticket <i class="fa-solid fa-arrow-right"></i></button>
+        <p class="form-consent">By submitting, you agree to be contacted by aadyosh about this request.</p>
+      </form>
+
+      <div class="form-success" id="supportSuccess" role="status">
+        <div class="ic"><i class="fa-solid fa-check"></i></div>
+        <h3 style="font-size:20px;margin-bottom:10px;">Ticket received</h3>
+        <p style="color:var(--ink-500);font-size:14px;">We've routed your request to the right team and will follow up over email within 24–48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ LINK-OUT ================= -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Looking For Quick Answers?</h2>
+      <p>Browse our frequently asked questions on programs, pricing, certificates, and career support.</p>
+      <div class="cta-actions">
+        <a href="index.html#faq" class="btn btn-dark">Browse FAQs <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="index.html" class="btn btn-ghost-light">Back to home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+          <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+        </a>
+        <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
+        <div class="footer-tags"><span>Company Reg. No. — add yours</span><span>GSTIN — add yours</span></div>
+      </div>
+      <div class="footer-col">
+        <h5>Who we are</h5>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="campus-ambassador.html">Campus Ambassador</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Quick links</h5>
+        <ul>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="refund-policy.html">Refunds</a></li>
+          <li><a href="return-policy.html">Program Changes</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="delete-account.html">Delete Account</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact us</h5>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> aadyosh. All rights reserved.</span>
+      <div class="links"><a href="#">Sitemap</a><a href="terms-and-conditions.html">Terms</a><a href="privacy-policy.html">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= CHAT WIDGET ================= -->
+<div class="chat-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-head"><i class="fa-solid fa-wand-magic-sparkles"></i> Ady · aadyosh Copilot</div>
+    <div class="chat-panel-body" id="chatBody">
+      <div class="chat-msg">👋 Hi! I'm Ady. Ask me about programs, pricing, certificates, or careers.</div>
+    </div>
+    <div class="chat-panel-foot">
+      <input type="text" id="chatInput" placeholder="Type a message..." aria-label="Type a message to Ady" />
+      <button id="chatSend"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
+</div>
+
+<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/site.js?v=10"></script>
+<script>
+document.getElementById("supportForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  document.getElementById("supportForm").style.display = "none";
+  document.getElementById("supportSuccess").classList.add("show");
+});
+</script>
+<script src="assets/js/api.js?v=1"></script>
+<script src="assets/js/auth.js?v=5"></script>
+<script src="assets/js/tawk.js?v=2"></script>
+</body>
+</html>

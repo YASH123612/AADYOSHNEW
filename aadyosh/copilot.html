@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Copilot — aadyosh</title>
+<meta name="description" content="Meet the aadyosh Copilot: an AI assistant for your workspace and a live AI mock-interview simulator for placement prep." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+      <img class="logo-word-img" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <div class="nav-item" data-menu="programs">
+        <button class="nav-link">Programs <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></button>
+        <div class="mega">
+          <div class="mega-tabs" id="megaTabs">
+            <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
+            <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+          </div>
+          <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
+          <div class="mega-footer">
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Rubric evaluation · Career outcomes</span>
+            <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-link" href="features.html">Features</a>
+      <a class="nav-link" href="campus-ambassador.html">Campus Ambassador</a>
+      <a class="nav-link" href="reviews.html">Reviews</a>
+      <a class="nav-link" href="careers.html">Careers</a>
+      <a class="nav-link" href="support.html">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#signin" class="btn btn-primary btn-sm" id="signInBtn"><span class="label-full">Sign In</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= COPILOT HERO ================= -->
+<section class="copilot-hero">
+  <div class="container">
+    <h1>Your AI Partner For <span style="color:var(--brand-300)">Learning &amp; Placement.</span></h1>
+    <p class="lead">One assistant to help you move faster through coursework, and a live AI interviewer to get you interview-ready before the real thing.</p>
+  </div>
+</section>
+
+<!-- ================= DEMO TABS ================= -->
+<section class="copilot-demo">
+  <div class="container">
+    <div class="copilot-tabs" role="tablist" aria-label="Copilot demo">
+      <button class="copilot-tab active" id="tab-assistant" role="tab" aria-selected="true" aria-controls="panel-assistant" data-tab="assistant"><i class="fa-solid fa-comments" aria-hidden="true"></i> Assistant</button>
+      <button class="copilot-tab" id="tab-interview" role="tab" aria-selected="false" aria-controls="panel-interview" data-tab="interview"><i class="fa-solid fa-microphone" aria-hidden="true"></i> AI Mock Interview</button>
+    </div>
+
+    <div class="copilot-panel active" id="panel-assistant" role="tabpanel" aria-labelledby="tab-assistant">
+      <div class="assistant-card">
+        <div class="assistant-head">
+          <div class="avatar-lg"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3>How can I help?</h3>
+          <p>Ask about your courses, projects, mentors, or upcoming deadlines.</p>
+        </div>
+        <div class="prompt-grid">
+          <button class="prompt-chip">Summarize my open feedback</button>
+          <button class="prompt-chip">Course revision ideas</button>
+          <button class="prompt-chip">Explain my last rubric score</button>
+          <button class="prompt-chip">What should I practice next?</button>
+          <button class="prompt-chip">Draft a mentor follow-up message</button>
+          <button class="prompt-chip">Show my placement readiness</button>
+        </div>
+        <div class="assistant-body" id="assistantBody"></div>
+        <div class="assistant-foot">
+          <input type="text" id="assistantInput" placeholder="Message aadyosh Copilot..." aria-label="Message aadyosh Copilot" />
+          <button id="assistantSend" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="copilot-panel" id="panel-interview" role="tabpanel" aria-labelledby="tab-interview">
+      <div class="interview-card">
+        <div class="interview-top">
+          <span class="tag">TECHNICAL · Full Stack Web Development</span>
+          <span class="live" id="interviewLiveTag" style="display:none;"><span class="dot"></span> LIVE · <span id="interviewQNum">Q1/8</span> · <span id="interviewTimer">00:00</span></span>
+        </div>
+        <div class="interview-stage">
+          <div id="interviewIdle">
+            <div class="interview-avatar"><i class="fa-solid fa-robot"></i></div>
+            <p style="color:var(--ink-300);font-size:14px;max-width:420px;margin:0 auto 20px;">Start a short mock interview. The AI interviewer asks role-based questions and gives feedback at the end — mic access is simulated in this preview.</p>
+            <button class="btn btn-primary interview-start-btn" id="startInterview"><i class="fa-solid fa-play"></i> Start mock interview</button>
+          </div>
+          <div id="interviewLive" style="display:none;">
+            <div class="interview-avatar"><div class="ring"></div><i class="fa-solid fa-robot"></i></div>
+            <div class="interview-status" id="interviewStatus">Listening</div>
+            <div class="interview-wave"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="interview-caption">
+              <div class="who">Interviewer</div>
+              <p id="interviewCaption">Tell me about a project where you had to optimize something for performance.</p>
+            </div>
+          </div>
+        </div>
+        <div class="interview-controls" id="interviewControls" style="display:none;">
+          <button class="active" aria-label="Mute microphone"><i class="fa-solid fa-microphone"></i></button>
+          <button class="active" aria-label="Toggle captions">CC</button>
+          <button aria-label="Toggle volume"><i class="fa-solid fa-volume-high"></i></button>
+          <button class="end" id="endInterview">End interview</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENEFITS ================= -->
+<section class="copilot-benefits">
+  <div class="container">
+    <div class="section-head center">
+      <h2>Built To Turn Practice Into <span class="highlight">Placement.</span></h2>
+    </div>
+    <div class="benefit-split">
+      <div class="benefit-tile">
+        <h3>Weak-area analysis ranks your gaps</h3>
+        <p>Every mock interview and assessment feeds a running skill profile, so you always know the highest-leverage thing to practice next — not just a list of scores.</p>
+      </div>
+      <div class="benefit-tile dark">
+        <h3>Placement-ready decisions from live signals</h3>
+        <p>Interview debriefs, code lab results, and mentor feedback roll up into one weekly priority list, so prepping for placement stays concrete instead of overwhelming.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready To Learn With aadyosh Copilot?</h2>
+      <p>Join a cohort and get a learning assistant grounded in your own courses, practice, and placement goals.</p>
+      <div class="cta-actions">
+        <a href="index.html#faq" class="btn btn-dark"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
+        <a href="index.html#programs" class="btn btn-ghost-light">Explore programs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark-img" src="assets/img/logo-mark.png" alt="" />
+          <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
+        </a>
+        <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
+        <div class="footer-tags"><span>Company Reg. No. — add yours</span><span>GSTIN — add yours</span></div>
+      </div>
+      <div class="footer-col">
+        <h5>Who we are</h5>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="campus-ambassador.html">Campus Ambassador</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Quick links</h5>
+        <ul>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="refund-policy.html">Refunds</a></li>
+          <li><a href="return-policy.html">Program Changes</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="delete-account.html">Delete Account</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact us</h5>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> aadyosh. All rights reserved.</span>
+      <div class="links"><a href="#">Sitemap</a><a href="terms-and-conditions.html">Terms</a><a href="privacy-policy.html">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="chat-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-head"><i class="fa-solid fa-wand-magic-sparkles"></i> Ady · aadyosh Copilot</div>
+    <div class="chat-panel-body" id="chatBody">
+      <div class="chat-msg">👋 Hi! I'm Ady. Ask me about programs, pricing, certificates, or careers.</div>
+    </div>
+    <div class="chat-panel-foot">
+      <input type="text" id="chatInput" placeholder="Type a message..." aria-label="Type a message to Ady" />
+      <button id="chatSend"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
+</div>
+
+<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/site.js?v=10"></script>
+<script>
+/* ---------- copilot tab switch ---------- */
+document.querySelectorAll(".copilot-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".copilot-tab").forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+    document.querySelectorAll(".copilot-panel").forEach(p => p.classList.remove("active"));
+    tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    document.getElementById("panel-" + tab.dataset.tab).classList.add("active");
+  });
+});
+
+/* ---------- assistant demo ---------- */
+const assistantBody = document.getElementById("assistantBody");
+const RESPONSES = {
+  "Summarize my open feedback": "You have 2 open mentor notes: tighten error handling in your API project, and add tests for the auth flow.",
+  "Course revision ideas": "Based on your last quiz, revisit async/await error handling and database indexing before your next session.",
+  "Explain my last rubric score": "You scored 8/10 on code quality and 6/10 on documentation — add setup instructions and inline comments to close the gap.",
+  "What should I practice next?": "Your weakest area right now is system design fundamentals — try 2 code lab challenges on scaling before your next mock interview.",
+  "Draft a mentor follow-up message": "Draft: \"Hi [Mentor], following up on your feedback — I've updated the auth flow and added tests. Could you take another look this week?\"",
+  "Show my placement readiness": "You're at 68% readiness: strong on projects, still building toward consistent mock-interview scores above 7/10.",
+};
+function addAssistantMsg(text, isUser) {
+  const div = document.createElement("div");
+  div.className = "chat-msg" + (isUser ? " user" : "");
+  div.style.maxWidth = "100%";
+  div.textContent = text;
+  assistantBody.appendChild(div);
+}
+document.querySelectorAll(".prompt-chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    addAssistantMsg(chip.textContent, true);
+    setTimeout(() => addAssistantMsg(RESPONSES[chip.textContent] || "Here's what I found — connect a real workspace to see live answers.", false), 450);
+  });
+});
+document.getElementById("assistantSend").addEventListener("click", sendAssistant);
+document.getElementById("assistantInput").addEventListener("keydown", e => { if (e.key === "Enter") sendAssistant(); });
+function sendAssistant() {
+  const input = document.getElementById("assistantInput");
+  const val = input.value.trim();
+  if (!val) return;
+  addAssistantMsg(val, true);
+  input.value = "";
+  setTimeout(() => addAssistantMsg("Got it — in the full product this connects to your real course and mentor data.", false), 450);
+}
+
+/* ---------- AI mock interview simulator (UI mock, no real audio/AI) ---------- */
+const QUESTIONS = [
+  "Tell me about a project where you had to optimize something for performance.",
+  "How would you design the database schema for a course-and-cohort system?",
+  "Walk me through how you'd debug a memory leak in a long-running service.",
+  "What's a trade-off you made recently between speed and code quality?",
+];
+let qIndex = 0, seconds = 0, timerId = null;
+function fmt(s) { const m = String(Math.floor(s / 60)).padStart(2, "0"); const r = String(s % 60).padStart(2, "0"); return `${m}:${r}`; }
+document.getElementById("startInterview").addEventListener("click", () => {
+  document.getElementById("interviewIdle").style.display = "none";
+  document.getElementById("interviewLive").style.display = "block";
+  document.getElementById("interviewControls").style.display = "flex";
+  document.getElementById("interviewLiveTag").style.display = "flex";
+  qIndex = 0; seconds = 0;
+  document.getElementById("interviewCaption").textContent = QUESTIONS[0];
+  document.getElementById("interviewQNum").textContent = `Q1/${QUESTIONS.length}`;
+  timerId = setInterval(() => { seconds++; document.getElementById("interviewTimer").textContent = fmt(seconds); if (seconds % 8 === 0) nextQuestion(); }, 1000);
+});
+function nextQuestion() {
+  qIndex = (qIndex + 1) % QUESTIONS.length;
+  document.getElementById("interviewCaption").textContent = QUESTIONS[qIndex];
+  document.getElementById("interviewQNum").textContent = `Q${qIndex + 1}/${QUESTIONS.length}`;
+}
+document.getElementById("endInterview").addEventListener("click", () => {
+  clearInterval(timerId);
+  document.getElementById("interviewLive").style.display = "none";
+  document.getElementById("interviewControls").style.display = "none";
+  document.getElementById("interviewLiveTag").style.display = "none";
+  document.getElementById("interviewIdle").style.display = "block";
+  document.getElementById("interviewIdle").innerHTML = `
+    <div class="interview-avatar"><i class="fa-solid fa-check"></i></div>
+    <div class="interview-status" style="margin-bottom:10px;">Interview complete</div>
+    <p style="color:var(--ink-300);font-size:14px;max-width:420px;margin:0 auto 20px;">You answered ${qIndex + 1} of ${QUESTIONS.length} questions in ${fmt(seconds)}. In the full product you'd get a detailed feedback report here.</p>
+    <button class="btn btn-primary interview-start-btn" onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i> Start another</button>
+  `;
+});
+</script>
+<script src="assets/js/auth.js?v=5"></script>
+<script src="assets/js/tawk.js?v=2"></script>
+</body>
+</html>
