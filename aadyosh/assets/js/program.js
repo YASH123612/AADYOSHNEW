@@ -98,7 +98,7 @@ function genericProgram(slug) {
     ],
     projects: [
       { title: "Portfolio Project 1", desc: "A guided build that demonstrates your core skills end-to-end." },
-      { title: "Portfolio Project 2", desc: "A more advanced build reviewed against hiring-team rubrics." },
+      { title: "Portfolio Project 2", desc: "A more advanced build reviewed by a working mentor." },
     ],
     price: { now: "7,499", was: "8,999" },
     faqs: [
@@ -165,7 +165,7 @@ function renderModules(filter) {
         <div>
           <h5>Deliverables</h5>
           ${m.deliverables.map(d => `<span class="deliv-chip">${d}</span>`).join("")}
-          <p style="font-size:12.5px;color:var(--ink-400);margin-top:10px;">Deliverables are evaluated with clear rubrics and mentor feedback.</p>
+          <p style="font-size:12.5px;color:var(--ink-400);margin-top:10px;">Deliverables are reviewed with mentor feedback.</p>
         </div>
         <div class="module-nav">
           <button type="button" class="btn btn-outline" data-go="${i - 1}" ${i === 0 ? "disabled" : ""}><i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Previous</button>
@@ -207,17 +207,18 @@ function renderModules(filter) {
 renderModules("");
 document.getElementById("moduleSearch").addEventListener("input", (e) => renderModules(e.target.value));
 
-document.getElementById("projGrid").innerHTML = data.projects.map((p, i) => `
+/* projects come from projects-data.js (3 per program); fall back to the program's own list if a slug has none */
+const trackProjects = (typeof PROJECT_LIST !== "undefined") ? PROJECT_LIST.filter(p => p.slug === slug) : [];
+document.getElementById("projGrid").innerHTML = (trackProjects.length ? trackProjects : data.projects.map(p => ({ level: "Blueprint", title: p.title, desc: p.desc, tools: [] }))).map((p, i) => `
   <div class="proj-card">
-    <div class="num">0${i + 1}</div>
-    <div class="kind">Blueprint</div>
+    <div class="proj-top"><div class="num">0${i + 1}</div><span class="proj-level lvl-${p.level.toLowerCase()}">${p.level}</span></div>
     <h4>${p.title}</h4>
     <p>${p.desc}</p>
+    ${p.tools.length ? `<div class="proj-tools">${p.tools.map(t => `<span>${t}</span>`).join("")}</div>` : ""}
   </div>
 `).join("");
 
-document.getElementById("priceNow").textContent = "₹" + data.price.now;
-document.getElementById("priceWas").textContent = "₹" + data.price.was;
+/* every program is the same Fellowship plan at one price (markup in program.html), so there is nothing per-program to fill in here */
 
 document.getElementById("progFaq").innerHTML = data.faqs.map((f, i) => `
   <div class="faq-item ${i === 0 ? "open" : ""}">
@@ -296,8 +297,7 @@ document.querySelectorAll("#progFaq .faq-q").forEach(q => {
 
 function updateBatchDays() {
   const now = new Date();
-  let target = new Date(now.getFullYear(), 9, 10); // 10 Oct
-  if (target <= now) target = new Date(now.getFullYear() + 1, 9, 10);
+  const target = window.AADYOSH_BATCH.date;   // set by batch.js: the next upcoming batch, rolls over monthly
   const diff = Math.max(0, target - now);
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
@@ -306,3 +306,4 @@ function updateBatchDays() {
 }
 updateBatchDays();
 setInterval(updateBatchDays, 30000);
+document.addEventListener("batch:update", updateBatchDays);

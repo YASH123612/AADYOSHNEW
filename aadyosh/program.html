@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="stylesheet" href="assets/css/styles.css?v=85">
 <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
 </head>
 <body>
@@ -28,11 +28,11 @@
           <div class="mega-tabs" id="megaTabs">
             <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
             <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
-            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">6</span></button>
           </div>
           <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
           <div class="mega-footer">
-            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Rubric evaluation · Career outcomes</span>
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Mentor reviews · Career outcomes</span>
             <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
           </div>
         </div>
@@ -87,7 +87,7 @@
 
       <div class="batch-pill">
         <span class="pill-icon"><i class="fa-regular fa-clock"></i></span>
-        <span><span class="pill-label">Next batch: </span><b>10 Oct</b></span>
+        <span><span class="pill-label">Next batch: </span><b data-batch-label>10 Nov</b></span>
         <span class="pill-dot"></span>
         <span>Starts in <b id="progBatchDays" class="pill-days">25 days</b></span>
         <span class="pill-dot"></span>
@@ -121,13 +121,13 @@
 </section>
 
 <!-- ================= PROJECTS ================= -->
-<section class="projects" style="background:var(--ink-50);">
+<section class="projects" id="projects" style="background:var(--ink-50);">
   <div class="container">
     <div class="section-head center">
       <h2>Projects Built For <span class="highlight">Hiring Decisions</span></h2>
-      <p>Structured blueprints with real tools, real deliverables, and rubric-ready work for this track.</p>
+      <p id="progProjSub">Structured blueprints with real tools, and real deliverables for this track.</p>
     </div>
-    <div class="proj-grid" id="projGrid"><!-- injected --></div>
+    <div class="proj-grid proj-grid-3" id="projGrid"><!-- injected --></div>
   </div>
 </section>
 
@@ -138,33 +138,41 @@
       <h2>Simple Pricing. <span class="highlight">Proven Outcomes.</span></h2>
       <p>Batch-limited seats. Full pricing confirmed on a quick screening call.</p>
     </div>
-    <div class="price-grid" style="max-width:520px;margin:0 auto;">
+    <div class="price-grid price-grid-one">
       <div class="price-card popular">
         <span class="ribbon">This track</span>
-        <span class="plan-name">Career Track</span>
-        <div class="price"><span class="now" id="priceNow">₹7,999</span><span class="was" id="priceWas">₹9,499</span></div>
+        <span class="plan-name">Fellowship</span>
+        <div class="price"><span class="now" id="priceNow">₹10,000</span></div>
         <div class="batch-row">
-          <span class="batch-tag"><i class="fa-regular fa-clock"></i> Next batch: <b>10 Oct</b></span>
+          <span class="batch-tag"><i class="fa-regular fa-clock"></i> Next batch: <b data-batch-label>10 Nov</b></span>
           <span class="batch-tag limited"><i class="fa-solid fa-bolt"></i> Limited seats</span>
         </div>
         <div class="price-actions">
-          <a href="index.html#faq" class="btn btn-outline btn-block">Enroll now</a>
+          <a href="https://payments.cashfree.com/forms/AADYOSH" rel="noopener" class="btn btn-outline btn-block">Enroll now</a>
           <a href="index.html#faq" class="btn btn-primary btn-block" data-mentor><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
         </div>
+        <p class="price-note">Full pricing details confirmed on a quick screening call.</p>
         <div class="whatget">What you get</div>
         <ul class="feat-cols">
           <li><i class="fa-solid fa-check"></i> Mentor-led live cohort</li>
-          <li><i class="fa-solid fa-check"></i> Real-world projects</li>
+          <li><i class="fa-solid fa-check"></i> Guaranteed internship</li>
+          <li><i class="fa-solid fa-check"></i> 2 real-world projects</li>
           <li><i class="fa-solid fa-check"></i> Resume + LinkedIn positioning</li>
-          <li><i class="fa-solid fa-check"></i> Placement support</li>
-          <li><i class="fa-solid fa-check"></i> AI copilot + mobile app access</li>
-          <li><i class="fa-solid fa-check"></i> 1-year recordings access</li>
+          <li><i class="fa-solid fa-check"></i> Pre-placement orientation</li>
+          <li><i class="fa-solid fa-check"></i> Industry-style assignments</li>
+          <li><i class="fa-solid fa-check"></i> Doubt support (48h SLA)</li>
+          <li><i class="fa-solid fa-check"></i> 6-month recordings access</li>
+          <li><i class="fa-solid fa-check"></i> Placement support until placed</li>
+          <li><i class="fa-solid fa-check"></i> LMS access until placed</li>
+          <li><i class="fa-solid fa-check"></i> 1-on-1 mock interviews</li>
+          <li><i class="fa-solid fa-check"></i> Curated assessment tests</li>
+          <li><i class="fa-solid fa-check"></i> Machine coding rounds</li>
+          <li><i class="fa-solid fa-check"></i> Weekly review + feedback loop</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
-
 <!-- ================= FAQ ================= -->
 <section class="faq">
   <div class="container">
@@ -185,7 +193,7 @@
           <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
         </a>
         <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
-        <div class="footer-tags"><span>Company Reg. No. — add yours</span><span>GSTIN — add yours</span></div>
+        <div class="footer-tags"><span>CIN: U62099MH2026PTC468346</span><span>GSTIN: 27ABECA9034E1ZS</span></div>
       </div>
       <div class="footer-col">
         <h5>Who we are</h5>
@@ -204,21 +212,19 @@
           <li><a href="refund-policy.html">Refunds</a></li>
           <li><a href="return-policy.html">Program Changes</a></li>
           <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
-          <li><a href="delete-account.html">Delete Account</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Contact us</h5>
         <ul class="footer-contact">
-          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
-          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
-          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hr@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val"><a href="tel:+917888209756" style="color:inherit;text-decoration:none;">+91 78882 09756</a></div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Aadyosh Corporate Private Limited, Anand Nagar, Nagpur</div></div></li>
         </ul>
         <div class="footer-social">
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.instagram.com/aadyosh/" rel="noopener noreferrer" aria-label="aadyosh on Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/110086196/" rel="noopener noreferrer" aria-label="aadyosh on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/channel/UCEqhCyXC7BdpnFsuLa2ojBw" rel="noopener noreferrer" aria-label="aadyosh on YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -305,11 +311,13 @@
   </div>
 </div>
 
-<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/programs-data.js?v=3"></script>
 <script src="assets/js/syllabus-data.js?v=1"></script>
-<script src="assets/js/syllabus-data-2.js?v=1"></script>
+<script src="assets/js/syllabus-data-2.js?v=2"></script>
+<script src="assets/js/projects-data.js?v=3"></script>
 <script src="assets/js/site.js?v=10"></script>
-<script src="assets/js/program.js?v=7"></script>
+<script src="assets/js/batch.js?v=1"></script>
+<script src="assets/js/program.js?v=11"></script>
 <script src="assets/js/api.js?v=2"></script>
 <script src="assets/js/auth.js?v=5"></script>
 <script src="assets/js/tawk.js?v=2"></script>

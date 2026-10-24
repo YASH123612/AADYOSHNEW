@@ -19,6 +19,7 @@ Admin endpoints (GET, header "Authorization: Bearer <token>"):
 The admin token is ADMIN_TOKEN from the environment, or a random one that is
 generated on first run and saved to backend/data/admin_token.txt.
 """
+import calendar
 import csv
 import hmac
 import io
@@ -31,7 +32,7 @@ import threading
 import time
 import urllib.request
 from collections import defaultdict, deque
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -94,6 +95,54 @@ FORMS = {
 ROUTE_BY_TABLE = {table: route for route, (table, _) in FORMS.items()}
 
 EMAIL_RE = re.compile(r"^[^@\s]{1,64}@[^@\s]{1,255}\.[^@\s]{2,}$")
+
+
+# ---------------------------------------------------------------- next batch date
+# Batches start on a fixed day of every month (India time), so the date shown on the site always rolls forward by
+# itself. Change the day with the BATCH_DAY env var or {"day": 15} in backend/data/batch.json; to run a one-off cohort on
+# a specific date set BATCH_DATE=2026-12-01 (or {"date": "2026-12-01"}). The override is used until that date has passed.
+IST = timezone(timedelta(hours=5, minutes=30))
+MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def next_batch(now=None):
+    now = (now or datetime.now(timezone.utc)).astimezone(IST)
+    cfg = {}
+    cfg_path = DATA_DIR / "batch.json"
+    if cfg_path.exists():
+        try:
+            cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            cfg = {}
+
+    def payload(start, source):
+        return {"start": start.isoformat(), "date": start.date().isoformat(),
+                "label": f"{start.day:02d} {MONTH_ABBR[start.month - 1]}",
+                "days_left": max(0, (start - now).days), "source": source}
+
+    override = (os.environ.get("BATCH_DATE") or str(cfg.get("date") or "")).strip()
+    if override:
+        try:
+            start = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=IST)
+            if start > now:
+                return payload(start, "override")
+        except ValueError:
+            pass  # bad override: fall back to the monthly rule
+
+    try:
+        day = int(os.environ.get("BATCH_DAY") or cfg.get("day") or 10)
+    except (TypeError, ValueError):
+        day = 10
+    day = min(max(day, 1), 31)
+    year, month = now.year, now.month
+    for _ in range(14):  # this month, then following months, until one is still in the future
+        start = datetime(year, month, min(day, calendar.monthrange(year, month)[1]), tzinfo=IST)
+        if start > now:
+            break
+        month += 1
+        if month > 12:
+            month, year = 1, year + 1
+    return payload(start, "monthly")
 
 
 # --------------------------------------------------------------------- storage
@@ -270,6 +319,10 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(SITE_ROOT), **kwargs)
 
     def end_headers(self):
+        # Static files get no Cache-Control from SimpleHTTPRequestHandler, so browsers reuse stale copies of the
+        # pages while the site is being edited. "no-cache" = always revalidate (cheap 304 when unchanged).
+        if not any(h.lower().startswith(b"cache-control") for h in getattr(self, "_headers_buffer", [])):
+            self.send_header("Cache-Control", "no-cache")
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
         super().end_headers()
@@ -343,6 +396,8 @@ class Handler(SimpleHTTPRequestHandler):
         path = parsed.path.rstrip("/")
         if path == "/api/health":
             return self.send_json(200, {"ok": True})
+        if path == "/api/next-batch":
+            return self.send_json(200, next_batch())
         if path.startswith("/api/admin/"):
             return self.admin(path[len("/api/admin/"):], parse_qs(parsed.query))
         if path.startswith("/api/"):

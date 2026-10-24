@@ -4,17 +4,6 @@
    live in programs-data.js (loaded before this file) so every page can use
    the same "Programs" dropdown, not just the homepage.
    ========================================================================== */
-const PROJECTS = [
-  { kind: "Blueprint", title: "Portfolio Website Build", desc: "Design and ship a personal portfolio with a live deploy." },
-  { kind: "Blueprint", title: "Data Dashboard", desc: "Turn a messy dataset into a clean, interactive dashboard." },
-  { kind: "Blueprint", title: "REST API Service", desc: "Build and document a production-style backend API." },
-  { kind: "Blueprint", title: "Mobile App MVP", desc: "Ship a minimal, functioning mobile app end-to-end." },
-  { kind: "Blueprint", title: "ML Prediction Model", desc: "Train, evaluate, and explain a simple prediction model." },
-  { kind: "Blueprint", title: "Cloud Deployment Pipeline", desc: "Set up CI/CD for a small app on a cloud provider." },
-  { kind: "Blueprint", title: "Security Audit Report", desc: "Assess a sample app and document real vulnerabilities." },
-  { kind: "Blueprint", title: "Brand Case Study", desc: "Plan and present a mini go-to-market case study." },
-];
-
 const REVIEWS = [
   { name: "Aarav M.", role: "Frontend Engineer Trainee", quote: "The mentor feedback loop made the biggest difference — every project review pointed at something specific to fix." },
   { name: "Sneha K.", role: "Cloud Program Learner", quote: "Structured, no fluff. I liked that certificates were tied to actual deliverables instead of just finishing videos." },
@@ -25,10 +14,10 @@ const FAQS = [
   { tag: "Overview", icon: "fa-solid fa-circle-info", q: "What is aadyosh, in one line?", a: "Outcome-first training with mentor-led cohorts and internship-style projects, built to produce portfolio proof and interview readiness — not just course completion." },
   { tag: "Mentors", icon: "fa-solid fa-user-check", q: "Who are the mentors?", a: "Working professionals from relevant fields who review your deliverables and run live sessions, not pre-recorded narrators." },
   { tag: "Beginner", icon: "fa-solid fa-seedling", q: "Is this beginner friendly?", a: "Yes. You start fundamentals-first, then move into structured projects with checkpoints and clear guidance on what to build." },
-  { tag: "Projects", icon: "fa-regular fa-file-lines", q: "What do I actually build?", a: "Two to three real-world projects per track, reviewed against a rubric, so you finish with something you can show — not just a transcript." },
+  { tag: "Projects", icon: "fa-regular fa-file-lines", q: "What do I actually build?", a: "Two to three real-world projects per track, reviewed by a mentor, so you finish with something you can show — not just a transcript." },
   { tag: "Certificate", icon: "fa-solid fa-award", q: "Do you provide a certificate?", a: "Yes — a training or internship certificate issued after your deliverables pass mentor review, not simply for attending sessions." },
   { tag: "Hiring", icon: "fa-solid fa-briefcase", q: "What does placement support mean here?", a: "Resume and profile reviews, mock interviews, and warm introductions through our hiring network once you're ready." },
-  { tag: "Access", icon: "fa-regular fa-clock", q: "How long do I get access to content?", a: "Recordings and materials stay available for a year so you can revisit, refine projects, and prep properly for interviews." },
+  { tag: "Access", icon: "fa-regular fa-clock", q: "How long do I get access to content?", a: "Recordings and materials stay available for six months so you can revisit, refine projects, and prep properly for interviews." },
 ];
 
 /* ==========================================================================
@@ -81,14 +70,57 @@ if ("IntersectionObserver" in window) {
 /* ==========================================================================
    Projects
    ========================================================================== */
-document.getElementById("projGrid").innerHTML = PROJECTS.map((p, i) => `
-  <div class="proj-card">
-    <div class="num">0${i + 1}</div>
-    <div class="kind">${p.kind}</div>
-    <h4>${p.title}</h4>
-    <p>${p.desc}</p>
-  </div>
-`).join("");
+/* Full catalogue (projects-data.js): search by skill/tool/title, filter by domain, reveal in pages of 12 */
+(function () {
+  const PAGE = 12;
+  const grid = document.getElementById("projGrid");
+  const search = document.getElementById("projSearch");
+  const count = document.getElementById("projCount");
+  const empty = document.getElementById("projEmpty");
+  const more = document.getElementById("projMore");
+  const filters = document.getElementById("projFilters");
+  let cat = "all", query = "", shown = PAGE;
+
+  /* only these domains get a filter chip (matches the tabs in the Programs section); all projects still show under "All" and in search */
+  const chips = [["all", "All domains"]].concat(["cs", "mgmt"].map(k => [k, CAT_LABEL[k]]));
+  filters.innerHTML = chips.map(([k, label]) =>
+    `<button type="button" class="proj-chip${k === "all" ? " active" : ""}" data-cat="${k}" aria-pressed="${k === "all"}">${label}</button>`).join("");
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const matches = () => {
+    const q = query.trim().toLowerCase();
+    return PROJECT_LIST.filter(p => (cat === "all" || p.cat === cat) &&
+      (!q || (p.title + " " + p.desc + " " + p.program + " " + p.level + " " + p.tools.join(" ")).toLowerCase().includes(q)));
+  };
+
+  function render() {
+    const list = matches();
+    const visible = list.slice(0, shown);
+    grid.innerHTML = visible.map((p, i) => `
+      <a class="proj-card" href="program.html?slug=${p.slug}#projects">
+        <div class="proj-top"><div class="num">${String(i + 1).padStart(2, "0")}</div><span class="proj-level lvl-${p.level.toLowerCase()}">${esc(p.level)}</span></div>
+        <div class="kind">${esc(p.program)}</div>
+        <h4>${esc(p.title)}</h4>
+        <p>${esc(p.desc)}</p>
+        <div class="proj-tools">${p.tools.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+      </a>`).join("");
+    count.textContent = `${list.length}/${PROJECT_LIST.length}`;
+    empty.hidden = list.length > 0;
+    more.parentElement.hidden = list.length <= shown;
+    more.textContent = `Show more projects (${list.length - shown} left)`;
+  }
+
+  filters.addEventListener("click", (e) => {
+    const b = e.target.closest(".proj-chip");
+    if (!b) return;
+    cat = b.dataset.cat; shown = PAGE;
+    filters.querySelectorAll(".proj-chip").forEach(c => { const on = c === b; c.classList.toggle("active", on); c.setAttribute("aria-pressed", on); });
+    render();
+  });
+  search.addEventListener("input", () => { query = search.value; shown = PAGE; render(); });
+  more.addEventListener("click", () => { shown += PAGE; render(); });
+  render();
+})();
 
 /* ==========================================================================
    Reviews
@@ -183,8 +215,8 @@ renderStepPanel();
    Certificate preview swipe
    ========================================================================== */
 const CERT_TABS = [
-  { label: "Training · Cohort completion", kind: "Certificate", desc: "Awarded for completing a mentor-led training program with rubric-based evaluation of all deliverables." },
-  { label: "Internship · Project + review proof", kind: "Internship Certificate", desc: "Awarded for completing an internship-style project track reviewed against hiring-team rubrics." },
+  { label: "Training · Cohort completion", kind: "Certificate", desc: "Awarded for completing a mentor-led training program, with every deliverable reviewed by a mentor." },
+  { label: "Internship · Project + review proof", kind: "Internship Certificate", desc: "Awarded for completing an internship-style project track reviewed by working mentors." },
   { label: "Excellence · Top performance", kind: "Certificate of Excellence", desc: "Awarded to top-performing learners for outstanding project quality and consistency." },
 ];
 let certIndex = 0;
@@ -268,8 +300,111 @@ function closeRoadmapModal() {
   if (roadmapTriggerEl) { roadmapTriggerEl.focus(); roadmapTriggerEl = null; }
   scheduleRoadmapRepeat();
 }
-document.getElementById("getPlanBtn").addEventListener("click", (e) => openRoadmapModal(e.currentTarget));
-document.getElementById("faqTalkToMentor")?.addEventListener("click", (e) => { e.preventDefault(); openRoadmapModal(e.currentTarget); });
+/* ==========================================================================
+   Hero search: type a program, a domain (Management, Civil...), or a tool (Figma, Docker...) and pick a match.
+   "Get plan" opens the best match when something is typed; with an empty box it opens the roadmap form as before.
+   ========================================================================== */
+const heroSearchGo = (function () {
+  const input = document.getElementById("heroSearch");
+  const box = document.getElementById("heroResults");
+  const ALIASES = {
+    cs: "computer science engineering software it tech coding programming developer",
+    ee: "electrical electronics ece eee hardware circuits",
+    mech: "mechanical manufacturing automobile machines",
+    civil: "civil construction structures buildings",
+    mgmt: "management business mba commerce marketing",
+    health: "healthcare medical life sciences clinical pharma",
+  };
+  const BROWSE_DOMAINS = Object.keys(CAT_LABEL).filter(k => k !== "ee" && k !== "mech" && k !== "civil" && k !== "health");   // the empty-box "Browse by domain" list (typing still finds every program)
+  const norm = s => " " + String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const toolsBySlug = {};
+  PROJECT_LIST.forEach(p => { (toolsBySlug[p.slug] = toolsBySlug[p.slug] || []).push(p.tools.join(" "), p.title); });
+  const ENTRIES = [];
+  Object.keys(PROGRAMS).forEach(cat => PROGRAMS[cat].forEach(p => {
+    const slug = slugify(p.title);
+    ENTRIES.push({ title: p.title, icon: p.icon, cat, domain: CAT_LABEL[cat], href: programHref(p.title), t: norm(p.title),
+      hay: norm([p.title, p.desc, CAT_LABEL[cat], ALIASES[cat], (toolsBySlug[slug] || []).join(" ")].join(" ")) });
+  }));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  function find(q) {
+    const tokens = norm(q).split(" ").filter(Boolean);
+    if (!tokens.length) return [];
+    return ENTRIES.map(e => {
+      if (!tokens.every(t => e.hay.includes(" " + t))) return null;       // every word must start a word somewhere
+      let s = 0;
+      tokens.forEach(t => { s += e.t.startsWith(" " + t) ? 4 : e.t.includes(" " + t) ? 3 : norm(e.domain).includes(" " + t) ? 2 : 1; });
+      return { e, s };
+    }).filter(Boolean).sort((a, b) => b.s - a.s || a.e.title.localeCompare(b.e.title)).map(x => x.e);
+  }
+
+  let active = -1;
+  const options = () => [...box.querySelectorAll(".sr-opt")];
+  function setActive(i) {
+    const opts = options();
+    opts.forEach((o, k) => o.classList.toggle("active", k === i));
+    active = i;
+    if (i >= 0 && opts[i]) { input.setAttribute("aria-activedescendant", opts[i].id); opts[i].scrollIntoView({ block: "nearest" }); }
+    else input.removeAttribute("aria-activedescendant");
+  }
+  function open() { box.hidden = false; input.setAttribute("aria-expanded", "true"); }
+  function close() { box.hidden = true; input.setAttribute("aria-expanded", "false"); setActive(-1); }
+
+  function render() {
+    const q = input.value;
+    let html;
+    if (!q.trim()) {
+      html = `<li class="sr-head" role="presentation">Browse by domain</li>` + BROWSE_DOMAINS.map((k, i) =>
+        `<li class="sr-opt sr-domain" role="option" id="hs-d${i}" data-domain="${esc(CAT_LABEL[k])}"><span class="sr-ic"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span><span><b>${esc(CAT_LABEL[k])}</b><small>${PROGRAMS[k].length} program${PROGRAMS[k].length > 1 ? "s" : ""}</small></span></li>`).join("");
+    } else {
+      const list = find(q);
+      html = list.length
+        ? `<li class="sr-head" role="presentation">${list.length} match${list.length > 1 ? "es" : ""}</li>` + list.slice(0, 8).map((e, i) =>
+            `<li class="sr-opt" role="option" id="hs-o${i}" data-href="${e.href}"><span class="sr-ic"><i class="${e.icon}" aria-hidden="true"></i></span><span><b>${esc(e.title)}</b><small>${esc(e.domain)}</small></span></li>`).join("")
+          + (list.length > 8 ? `<li class="sr-head" role="presentation">Keep typing to narrow ${list.length - 8} more</li>` : "")
+        : `<li class="sr-empty" role="presentation">No program matches "${esc(q.trim())}". Try a domain like Management, or <a href="#" id="hsPlan">get a personalised plan</a>.</li>`;
+    }
+    box.innerHTML = html;
+    setActive(-1);
+    open();
+  }
+
+  function pick(opt) {
+    if (!opt) return;
+    if (opt.dataset.domain) { input.value = opt.dataset.domain; render(); input.focus(); return; }
+    if (opt.dataset.href) location.href = opt.dataset.href;
+  }
+
+  input.addEventListener("input", render);
+  input.addEventListener("focus", render);
+  input.addEventListener("keydown", (e) => {
+    const opts = options();
+    if (e.key === "ArrowDown") { e.preventDefault(); if (box.hidden) render(); else setActive(opts.length ? (active + 1) % opts.length : -1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive(opts.length ? (active <= 0 ? opts.length - 1 : active - 1) : -1); }
+    else if (e.key === "Enter") { e.preventDefault(); pick(opts[active] || opts[0]); }
+    else if (e.key === "Escape") { close(); }
+  });
+  box.addEventListener("mousedown", (e) => e.preventDefault());            // keep focus in the input while clicking a result
+  box.addEventListener("click", (e) => {
+    if (e.target.closest("#hsPlan")) { e.preventDefault(); close(); openRoadmapModal(document.getElementById("getPlanBtn")); return; }
+    pick(e.target.closest(".sr-opt"));
+  });
+  document.addEventListener("click", (e) => { if (!e.target.closest(".search-card")) close(); });
+
+  /* used by "Get plan": true = we navigated to a program, false = nothing to open, show the roadmap form */
+  return function () {
+    if (!input.value.trim()) return false;
+    const hit = find(input.value)[0];
+    if (!hit) return false;
+    location.href = hit.href;
+    return true;
+  };
+})();
+document.getElementById("getPlanBtn").addEventListener("click", (e) => { if (!heroSearchGo()) openRoadmapModal(e.currentTarget); });
+/* every "Talk to a Mentor" button on this page (marked data-open-roadmap) opens the pop-up form */
+document.querySelectorAll("[data-open-roadmap]").forEach(btn => btn.addEventListener("click", (e) => { e.preventDefault(); openRoadmapModal(e.currentTarget); }));
+/* other pages link here with ?talk=mentor so their "Talk to a Mentor" buttons land on the same form */
+if (new URLSearchParams(location.search).get("talk") === "mentor") setTimeout(() => openRoadmapModal(document.getElementById("getPlanBtn")), 400);
 document.getElementById("roadmapModalClose").addEventListener("click", closeRoadmapModal);
 roadmapModal.addEventListener("click", (e) => { if (e.target === roadmapModal) closeRoadmapModal(); });
 document.addEventListener("keydown", (e) => {
@@ -330,8 +465,7 @@ document.getElementById("chatInput").addEventListener("keydown", e => { if (e.ke
    ========================================================================== */
 function updateCountdown() {
   const now = new Date();
-  let target = new Date(now.getFullYear(), 9, 10); // 10 Oct
-  if (target <= now) target = new Date(now.getFullYear() + 1, 9, 10);
+  const target = window.AADYOSH_BATCH.date;   // set by batch.js: the next upcoming batch, rolls over monthly
   const diff = Math.max(0, target - now);
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
@@ -340,5 +474,6 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 30000);
+document.addEventListener("batch:update", updateCountdown);
 
 document.getElementById("year").textContent = new Date().getFullYear();

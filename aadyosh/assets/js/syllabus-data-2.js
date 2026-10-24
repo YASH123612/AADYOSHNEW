@@ -146,24 +146,6 @@ Object.assign(SYLLABUS, {
     "Project & Change Management | Project planning; Risk management; Change management; Stakeholder communication | Project plan; Risk register",
     "Capstone: Operations Improvement | Diagnose a process; Design improvements; Business case; Presentation | Improvement proposal; Capstone review",
   ],
-  "entrepreneurship-startups": [
-    "Entrepreneurial Mindset | Opportunity recognition; Founder skills; Idea generation; Risk and resilience | Idea journal; Opportunity brief",
-    "Customer & Market Validation | Problem interviews; Market sizing; Competitor analysis; Validation experiments | Validation report; Interview notes",
-    "Business Model & MVP | Business model canvas; Value proposition; MVP planning; No-code prototyping | Business model; MVP plan",
-    "Finance for Startups | Startup costs and unit economics; Pricing; Basic financial projections; Funding options | Financial plan; Unit-economics sheet",
-    "Go-to-Market & Growth | Positioning; Acquisition channels; Sales basics; Retention and metrics | GTM plan; Metrics dashboard",
-    "Legal, Team & Fundraising | Company structures; IP basics; Building the founding team; Pitching to investors | Pitch deck; Team plan",
-    "Capstone: Startup Pitch | Refine your idea; Complete plan and financials; Investor-style pitch; Feedback round | Final pitch; Capstone review",
-  ],
-  "supply-chain-management": [
-    "Supply Chain Foundations | Supply chain structure and flows; Key performance measures; Bullwhip effect; Sustainability basics | Chain map; Quiz",
-    "Procurement & Sourcing | Supplier selection; Contracts and negotiation; Make-or-buy; Supplier risk | Sourcing plan; Supplier scorecard",
-    "Demand Planning & Forecasting | Forecasting methods; Sales and operations planning; Forecast accuracy; Collaboration | Forecast model; S&OP summary",
-    "Inventory & Warehousing | Inventory policies; Warehouse layout and flow; Order picking; WMS overview | Inventory plan; Layout sketch",
-    "Logistics & Transportation | Transport modes; Route planning; Incoterms and documentation; Last-mile delivery | Logistics plan; Cost comparison",
-    "Analytics & Digital Tools | ERP and SCM systems; Dashboards and KPIs; Tracking technologies; Risk analytics | SCM dashboard; KPI report",
-    "Capstone: Supply Chain Redesign | Analyse a supply chain; Design improvements; Cost and service trade-offs; Presentation | Redesign proposal; Capstone review",
-  ],
 
   /* ---------- Healthcare & Life Sciences ---------- */
   "medical-coding": [

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="stylesheet" href="assets/css/styles.css?v=85">
 <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
 </head>
 <body class="anim-page">
@@ -28,11 +28,11 @@
           <div class="mega-tabs" id="megaTabs">
             <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
             <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
-            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">6</span></button>
           </div>
           <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
           <div class="mega-footer">
-            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects &middot; Rubric evaluation &middot; Career outcomes</span>
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects &middot; Mentor reviews &middot; Career outcomes</span>
             <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
           </div>
         </div>
@@ -53,7 +53,7 @@
 <section class="page-hero">
   <div class="container">
     <h1>Pricing &amp; Refund <span class="highlight">Policy</span></h1>
-    <p class="lead">How our pricing works, when you can get a refund, and how duplicate payments are handled.</p>
+    <p class="lead">How our pricing works, why payments are non-refundable, and how duplicate payments are handled.</p>
   </div>
 </section>
 
@@ -61,67 +61,71 @@
 <section class="legal-wrap">
   <div class="container">
     <article class="legal-doc">
-      <div class="legal-note"><i class="fa-solid fa-circle-info" style="margin-right:6px;"></i>This is a starter policy written to match how this site works today. Replace the bracketed details with your real business information and have a qualified legal professional review it before you rely on it.</div>
-      <p class="meta">Last updated: 18 September 2026</p>
+      <p class="meta">Last updated: 25 October 2026</p>
 
-      <h2 class="first">1. Scope</h2>
+      <h2 class="first" id="scope">1. Scope</h2>
       <p>This policy explains how aadyosh ("we", "us") handles pricing, cancellations, refunds, and duplicate payments for programs purchased on this website. When you pay for a program, you also agree to our <a href="terms-and-conditions.html">Terms &amp; Conditions</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p>
 
-      <h2>2. Transparent pricing</h2>
+      <h2 id="pricing">2. Transparent pricing</h2>
       <p>The fee for each program is shown before you pay, along with what it includes. Where a price is confirmed on a screening call, the amount agreed on that call is the amount you pay. Discounts and launch offers are described at the time they apply and may not be available afterwards.</p>
 
-      <h2>3. Refund window</h2>
+      <h2 id="no-refunds">3. Payments are non-refundable</h2>
+      <p>Once a payment has been successfully processed, it is <strong>non-refundable</strong>. This applies whether you attend every session or none, and whether you cancel before or after your batch starts.</p>
+      <div class="legal-note"><i class="fa-solid fa-triangle-exclamation" style="margin-right:6px;"></i>Please read this before you pay. Ask your questions on the screening call first, because we cannot reverse a completed payment.</div>
+      <p>The only exceptions are the ones listed in section 4 below, or a cancellation window that is stated on the checkout page of a specific program. If a program offers such a window, the checkout page is what applies to that program.</p>
       <ul>
-        <li>You may request a full refund within 7 days of enrolment, provided you have not completed more than one live session and have not downloaded program materials.</li>
-        <li>After this window, fees are non-refundable, except in the situations described in section 4.</li>
-        <li>Requesting to switch to a different program or a later cohort is not the same as a refund &mdash; see our <a href="return-policy.html">Program Change &amp; Rescheduling Policy</a>.</li>
+        <li>Moving to a later batch or a different program is not a refund &mdash; see our <a href="return-policy.html">Program Change &amp; Rescheduling Policy</a>.</li>
+        <li>Any scholarship, discount, or fee-benefit that a program describes is separate from a cancellation refund and follows the conditions stated with that offer.</li>
       </ul>
 
-      <h2>4. When we refund in full</h2>
+      <h2 id="exceptions">4. The exceptions</h2>
       <ul>
-        <li>We cancel a cohort and cannot offer you a seat in a comparable one within a reasonable time.</li>
-        <li>You were charged twice for the same enrolment, or charged an amount that does not match the price you agreed to (see section 7, duplicate payments).</li>
+        <li><strong>Duplicate or incorrect charge:</strong> you were charged twice for the same enrolment, or charged an amount that does not match the price you agreed to. We refund the difference after verifying it (see section 7).</li>
+        <li><strong>Cohort cancelled by us:</strong> we cancel your batch and cannot offer you a seat in a comparable one within a reasonable time.</li>
+        <li><strong>A program page says otherwise:</strong> the checkout page of that program states a cancellation window, and your request falls inside it.</li>
       </ul>
 
-      <h2>5. Why we restrict refunds after the window</h2>
-      <p>Our cohorts run with limited seats and mentor capacity that we commit to you as soon as you enrol:</p>
+      <h2 id="why">5. Why refunds are restricted</h2>
+      <p>Our programs run in cohorts, and most of what we spend on you is committed the moment you enrol:</p>
       <ul>
-        <li><strong>Limited seats:</strong> each batch has a fixed number of spots, and a late withdrawal takes a seat that could have gone to someone else.</li>
-        <li><strong>Mentor and reviewer time:</strong> mentor slots, project review bandwidth, and evaluation capacity are reserved per learner ahead of the batch.</li>
-        <li><strong>Access starts immediately:</strong> you can typically access materials, the community, and scheduling as soon as you enrol, before the batch itself begins.</li>
+        <li><strong>Limited seats:</strong> each batch has a fixed number of places, and a withdrawal part-way through cannot be filled by someone else.</li>
+        <li><strong>Reserved time:</strong> mentor sessions, project review capacity, and evaluation effort are set aside for you before the batch begins.</li>
+        <li><strong>Early costs:</strong> payment processing, onboarding, and support start straight away.</li>
+        <li><strong>Access starts early:</strong> you can usually reach materials, the community, and scheduling soon after you enrol, before the batch itself starts.</li>
       </ul>
 
-      <h2>6. When refunds are not available</h2>
+      <h2 id="not-available">6. Situations that are not refunded</h2>
       <ul>
-        <li>You stop attending, or lose interest, after the refund window in section 3 has passed.</li>
+        <li>You stop attending, change your mind, or can no longer commit the time.</li>
         <li>Your account is suspended or closed for breaching our <a href="terms-and-conditions.html">Terms &amp; Conditions</a>.</li>
-        <li>Fees paid for services that have already been delivered, such as a completed mock interview, resume review, or 1:1 mentor session.</li>
+        <li>You did not receive a job or interview call. We do not guarantee those outcomes (see our <a href="terms-and-conditions.html">Terms &amp; Conditions</a>).</li>
+        <li>Services already delivered, such as a completed mock interview, resume review, or 1:1 mentor session.</li>
       </ul>
 
-      <h2>7. Duplicate or incorrect payments</h2>
-      <p>If you are charged twice for the same enrolment, or charged an amount that does not match what you agreed to, we will refund the difference once we have verified it. Email <a href="mailto:hello@aadyosh.com">hello@aadyosh.com</a> with both payment references (or screenshots), your registered email or phone number, and the program name.</p>
+      <h2 id="duplicate">7. Duplicate or incorrect payments</h2>
+      <p>If you are charged twice for the same order, or charged an amount you did not agree to, we will refund the extra amount once we have verified it. Email <a href="mailto:hr@aadyosh.com">hr@aadyosh.com</a> with both payment references (or screenshots), your registered email or phone number, and the program name.</p>
 
-      <h2>8. Changing your cohort or program</h2>
+      <h2 id="changes">8. Changing your cohort or program</h2>
       <p>If you cannot join your assigned batch, you can ask to move to a later cohort of the same program, or switch to a different program, before your batch's first live session. This is handled under our <a href="return-policy.html">Program Change &amp; Rescheduling Policy</a>, not as a refund, and depends on seat availability in the new batch.</p>
 
-      <h2>9. How to request a refund</h2>
-      <p>Email <a href="mailto:hello@aadyosh.com">hello@aadyosh.com</a> from your registered email address with your full name, program name, and payment reference, or raise a ticket on the <a href="support.html">Support</a> page. Include:</p>
+      <h2 id="request">9. How to make a request</h2>
+      <p>For a duplicate payment, a cancelled cohort, or any refund question, email <a href="mailto:hr@aadyosh.com">hr@aadyosh.com</a> from your registered email address, or raise a ticket on the <a href="support.html">Support</a> page. Include:</p>
       <ul>
-        <li>Full name and the email or phone number you enrolled with.</li>
+        <li>Your full name and the email or phone number you enrolled with.</li>
         <li>Program name and batch.</li>
         <li>Payment reference or transaction ID.</li>
-        <li>Reason for the request (optional, but it helps us process it faster).</li>
+        <li>What happened (a screenshot of a duplicate charge helps).</li>
       </ul>
-      <p>We aim to review and respond to requests within 3&ndash;5 working days.</p>
+      <p>We aim to review and respond within 3&ndash;5 working days.</p>
 
-      <h2>10. How approved refunds are paid</h2>
-      <p>Approved refunds are sent back to the original payment method within 7&ndash;10 working days of approval, where the payment provider allows it; otherwise we will agree an alternative method with you. Your bank or card network's own processing times may add a few extra days on top of that.</p>
+      <h2 id="payout">10. How approved refunds are paid</h2>
+      <p>Approved refunds go back to the original payment method where the payment provider allows it; otherwise we will agree another method with you. How long it takes to reach you depends on the payment gateway and your bank or card network, so it can take several working days after we approve it.</p>
 
-      <h2>11. Changes to this policy</h2>
+      <h2 id="updates">11. Changes to this policy</h2>
       <p>We may update this policy from time to time. The "last updated" date above shows when it last changed. Continuing to use aadyosh after a change means you accept the updated policy.</p>
 
-      <h2>12. Contact</h2>
-      <p>Questions about pricing or refunds? Write to <a href="mailto:hello@aadyosh.com">hello@aadyosh.com</a> or use the <a href="support.html">Support</a> page.</p>
+      <h2 id="contact">12. Contact</h2>
+      <p>Questions about pricing or refunds? Write to <a href="mailto:hr@aadyosh.com">hr@aadyosh.com</a> or use the <a href="support.html">Support</a> page.</p>
     </article>
   </div>
 </section>
@@ -135,7 +139,7 @@
           <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
         </a>
         <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
-        <div class="footer-tags"><span>Company Reg. No. &mdash; add yours</span><span>GSTIN &mdash; add yours</span></div>
+        <div class="footer-tags"><span>CIN: U62099MH2026PTC468346</span><span>GSTIN: 27ABECA9034E1ZS</span></div>
       </div>
       <div class="footer-col">
         <h5>Who we are</h5>
@@ -154,21 +158,19 @@
           <li><a href="refund-policy.html">Refunds</a></li>
           <li><a href="return-policy.html">Program Changes</a></li>
           <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
-          <li><a href="delete-account.html">Delete Account</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Contact us</h5>
         <ul class="footer-contact">
-          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
-          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
-          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hr@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val"><a href="tel:+917888209756" style="color:inherit;text-decoration:none;">+91 78882 09756</a></div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Aadyosh Corporate Private Limited, Anand Nagar, Nagpur</div></div></li>
         </ul>
         <div class="footer-social">
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.instagram.com/aadyosh/" rel="noopener noreferrer" aria-label="aadyosh on Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/110086196/" rel="noopener noreferrer" aria-label="aadyosh on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/channel/UCEqhCyXC7BdpnFsuLa2ojBw" rel="noopener noreferrer" aria-label="aadyosh on YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -194,7 +196,7 @@
   <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
 </div>
 
-<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/programs-data.js?v=3"></script>
 <script src="assets/js/site.js?v=10"></script>
 <script src="assets/js/auth.js?v=5"></script>
 <script src="assets/js/tawk.js?v=2"></script>

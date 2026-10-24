@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="stylesheet" href="assets/css/styles.css?v=85">
 <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
 </head>
 <body>
@@ -29,11 +29,11 @@
           <div class="mega-tabs" id="megaTabs">
             <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
             <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
-            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">6</span></button>
           </div>
           <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
           <div class="mega-footer">
-            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Rubric evaluation · Career outcomes</span>
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Mentor reviews · Career outcomes</span>
             <a href="#programs" class="btn btn-primary btn-sm">Explore all programs</a>
           </div>
         </div>
@@ -62,19 +62,20 @@
 
       <div class="search-card">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search any program (AI, Full Stack, Cloud, Data...)" aria-label="Search programs" />
+        <input type="text" id="heroSearch" placeholder="Search a program or domain (AI, Full Stack, Management...)" aria-label="Search programs and domains" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="heroResults" autocomplete="off" />
         <button class="btn btn-primary" id="getPlanBtn">Get plan <i class="fa-solid fa-arrow-right"></i></button>
+        <ul class="search-results" id="heroResults" role="listbox" aria-label="Matching programs" hidden></ul>
       </div>
 
       <div class="hero-actions">
-        <a href="#programs" class="btn btn-accent btn-lg">Start learning free <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#programs" class="btn btn-accent btn-lg">Choose My Domain <i class="fa-solid fa-arrow-right"></i></a>
         <a href="#how" class="watch-link"><span class="play-dot"><i class="fa-solid fa-play"></i></span> Watch how it works</a>
       </div>
 
       <ul class="trust-row">
         <li><i class="fa-solid fa-circle-check"></i> Mentor-led cohorts</li>
         <li><i class="fa-solid fa-briefcase"></i> Internship + projects</li>
-        <li><i class="fa-solid fa-shield-halved"></i> Rubric-based certification</li>
+        <li><i class="fa-solid fa-handshake"></i> Placement support</li>
       </ul>
     </div>
 
@@ -111,7 +112,7 @@
 
       <div class="batch-pill">
         <span class="pill-icon"><i class="fa-regular fa-clock"></i></span>
-        <span><span class="pill-label">Next batch: </span><b>10 Oct</b></span>
+        <span><span class="pill-label">Next batch: </span><b data-batch-label>10 Nov</b></span>
         <span class="pill-dot"></span>
         <span>Starts in <b id="batchDays" class="pill-days">27 days</b></span>
       </div>
@@ -185,10 +186,10 @@
   <div class="container">
     <h2>Internships That Turn Into <span style="color:var(--brand-300)">Real Offers.</span></h2>
     <p class="hero-sub">Structured projects, honest reviews, and interview practice that actually converts rounds.</p>
-    <a href="#faq" class="btn btn-ghost-light"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
+    <a href="#faq" class="btn btn-ghost-light" data-open-roadmap><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
 
     <div class="convert-grid">
-      <div class="convert-card"><i class="fa-solid fa-diagram-project"></i><h4>Portfolio-grade projects</h4><p>Ship 2–3 real deliverables reviewed against hiring-team rubrics, not just attendance.</p></div>
+      <div class="convert-card"><i class="fa-solid fa-diagram-project"></i><h4>Portfolio-grade projects</h4><p>Ship 2–3 real deliverables reviewed by working mentors, not just attendance.</p></div>
       <div class="convert-card"><i class="fa-solid fa-comments"></i><h4>1-on-1 mock interviews</h4><p>Practice with structured feedback so weak spots get fixed before the real round.</p></div>
       <div class="convert-card"><i class="fa-solid fa-file-signature"></i><h4>Resume &amp; profile reviews</h4><p>Get your resume and LinkedIn positioned around what recruiters actually scan for.</p></div>
       <div class="convert-card"><i class="fa-solid fa-people-arrows"></i><h4>Warm referral support</h4><p>Tap into mentor and alumni referrals across our hiring network when you're ready.</p></div>
@@ -201,19 +202,18 @@
   <div class="container">
     <div class="section-head">
       <h2>Pick A Track, See The <span class="highlight">Full Curriculum</span></h2>
-      <p>Every program ships with real projects, rubric evaluation, and a completion certificate.</p>
+      <p>Every program ships with real projects, mentor reviews, and a completion certificate.</p>
     </div>
 
     <div class="tab-bar" id="tabBar">
       <button class="active" data-cat="cs"><i class="fa-solid fa-code"></i> Computer Science <span class="count">17</span></button>
-      <button data-cat="civil"><i class="fa-solid fa-drafting-compass"></i> Civil <span class="count">1</span></button>
-      <button data-cat="mgmt"><i class="fa-solid fa-briefcase"></i> Management <span class="count">8</span></button>
+      <button data-cat="mgmt"><i class="fa-solid fa-briefcase"></i> Management <span class="count">6</span></button>
     </div>
 
     <div class="program-grid" id="programGrid"><!-- injected --></div>
 
     <div class="programs-cta">
-      <a href="#faq" class="btn btn-primary"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
+      <a href="#faq" class="btn btn-primary" data-open-roadmap><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
       <a href="#certification" class="btn btn-outline">See certificates <i class="fa-solid fa-chevron-right" style="font-size:11px"></i></a>
     </div>
   </div>
@@ -225,10 +225,13 @@
   <div class="container">
     <div class="section-head center">
       <h2>Projects Built For <span class="highlight">Hiring Decisions</span></h2>
-      <p>Structured blueprints with real tools, real deliverables, and rubric-ready work.</p>
+      <p>Structured blueprints with real tools, real deliverables, and work you can show.</p>
     </div>
-    <div class="proj-search"><i class="fa-solid fa-magnifying-glass" style="color:var(--ink-400)"></i><input type="text" placeholder="Search by skill, tool, tech..." aria-label="Search projects" /><span class="count">8/8</span></div>
+    <div class="proj-search"><i class="fa-solid fa-magnifying-glass" style="color:var(--ink-400)"></i><input type="text" id="projSearch" placeholder="Search by skill, tool, tech..." aria-label="Search projects" autocomplete="off" /><span class="count" id="projCount" aria-live="polite"></span></div>
+    <div class="proj-filters" id="projFilters" role="group" aria-label="Filter projects by domain"><!-- injected --></div>
     <div class="proj-grid" id="projGrid"><!-- injected --></div>
+    <p class="proj-empty" id="projEmpty" hidden>No projects match that search. Try a tool name like "Python" or "Figma".</p>
+    <div class="proj-more"><button type="button" class="btn btn-outline" id="projMore"></button></div>
   </div>
 </section>
 
@@ -237,17 +240,16 @@
   <div class="container certify-grid">
     <div>
       <h2 style="margin:18px 0 14px;">Get Certified. <span class="highlight">Get Noticed.</span></h2>
-      <p style="color:var(--ink-500);font-size:16px;">Every certificate is tied to real deliverables, rubric checks, and mentor sign-off — built to be checked, not just displayed.</p>
+      <p style="color:var(--ink-500);font-size:16px;">Every certificate is tied to real deliverables and mentor sign-off — built to be checked, not just displayed.</p>
 
       <div class="pill-row">
         <span><i class="fa-solid fa-user-check"></i> Mentor-reviewed</span>
-        <span><i class="fa-solid fa-list-check"></i> Rubric-scored</span>
         <span><i class="fa-solid fa-share-nodes"></i> Shareable proof</span>
       </div>
 
       <div class="feat-row">
         <div class="ic"><i class="fa-solid fa-medal"></i></div>
-        <div><h4>Outcome-based credential</h4><p>Issued after rubric checks and mentor review — not simply for showing up.</p></div>
+        <div><h4>Outcome-based credential</h4><p>Issued after mentor review — not simply for showing up.</p></div>
       </div>
       <div class="feat-row">
         <div class="ic"><i class="fa-solid fa-handshake"></i></div>
@@ -259,7 +261,7 @@
       </div>
 
       <div class="certify-actions">
-        <a href="#faq" class="btn btn-primary"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
+        <a href="#faq" class="btn btn-primary" data-open-roadmap><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
         <a href="#reviews" class="btn btn-outline">See reviews <i class="fa-solid fa-chevron-right" style="font-size:11px"></i></a>
       </div>
     </div>
@@ -277,7 +279,7 @@
         <div class="kind" id="certKind">Certificate</div>
         <div class="sub">of training completion</div>
         <div class="name">Student Name</div>
-        <p class="desc" id="certDesc">Awarded for completing a mentor-led training program with rubric-based evaluation of all deliverables.</p>
+        <p class="desc" id="certDesc">Awarded for completing a mentor-led training program, with every deliverable reviewed by a mentor.</p>
         <div class="foot">
           <div class="sig">Program Mentor<small>Signature</small></div>
           <div class="seal">SAMPLE<br>SEAL</div>
@@ -301,47 +303,30 @@
       <p>Batch-limited seats. Prices shown are illustrative starting points.</p>
     </div>
 
-    <div class="price-grid">
-      <div class="price-card">
-        <span class="plan-name">Foundation</span>
-        <div class="price"><span class="now">₹7,499</span><span class="was">₹8,999</span></div>
+    <div class="price-grid price-grid-one">
+      <div class="price-card popular">
+        <span class="ribbon">Most popular</span>
+        <span class="plan-name">Fellowship</span>
+        <div class="price"><span class="now">₹10,000</span></div>
         <div class="batch-row">
-          <span class="batch-tag"><i class="fa-regular fa-clock"></i> Next batch: <b>05 Oct</b></span>
+          <span class="batch-tag"><i class="fa-regular fa-clock"></i> Next batch: <b data-batch-label>10 Nov</b></span>
           <span class="batch-tag limited"><i class="fa-solid fa-bolt"></i> Limited seats</span>
         </div>
         <div class="price-actions">
-          <a href="#faq" class="btn btn-outline btn-block">Enroll now</a>
-          <a href="#faq" class="btn btn-primary btn-block"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
+          <a href="https://payments.cashfree.com/forms/AADYOSH" rel="noopener" class="btn btn-outline btn-block">Enroll now</a>
+          <a href="#faq" class="btn btn-primary btn-block" data-open-roadmap><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
         </div>
         <p class="price-note">Full pricing details confirmed on a quick screening call.</p>
         <div class="whatget">What you get</div>
         <ul class="feat-cols">
           <li><i class="fa-solid fa-check"></i> Mentor-led live cohort</li>
+          <li><i class="fa-solid fa-check"></i> Guaranteed internship</li>
           <li><i class="fa-solid fa-check"></i> 2 real-world projects</li>
           <li><i class="fa-solid fa-check"></i> Resume + LinkedIn positioning</li>
           <li><i class="fa-solid fa-check"></i> Pre-placement orientation</li>
           <li><i class="fa-solid fa-check"></i> Industry-style assignments</li>
-          <li><i class="fa-solid fa-check"></i> AI copilot + mobile app access</li>
           <li><i class="fa-solid fa-check"></i> Doubt support (48h SLA)</li>
-          <li><i class="fa-solid fa-check"></i> 1-year recordings access</li>
-        </ul>
-      </div>
-
-      <div class="price-card popular">
-        <span class="ribbon">Most popular</span>
-        <span class="plan-name">Career Track</span>
-        <div class="price"><span class="now">₹8,499</span><span class="was">₹9,999</span></div>
-        <div class="batch-row">
-          <span class="batch-tag"><i class="fa-regular fa-clock"></i> Next batch: <b>05 Oct</b></span>
-          <span class="batch-tag limited"><i class="fa-solid fa-bolt"></i> Limited seats</span>
-        </div>
-        <div class="price-actions">
-          <a href="#faq" class="btn btn-outline btn-block">Enroll now</a>
-          <a href="#faq" class="btn btn-primary btn-block"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
-        </div>
-        <p class="price-note">Full pricing details confirmed on a quick screening call.</p>
-        <div class="whatget">Everything in Foundation, plus</div>
-        <ul class="feat-cols">
+          <li><i class="fa-solid fa-check"></i> 6-month recordings access</li>
           <li><i class="fa-solid fa-check"></i> Placement support until placed</li>
           <li><i class="fa-solid fa-check"></i> LMS access until placed</li>
           <li><i class="fa-solid fa-check"></i> 1-on-1 mock interviews</li>
@@ -385,11 +370,11 @@
       <div class="faq-tag-row">
         <span>Mentor-led cohorts</span>
         <span>Portfolio-grade projects</span>
-        <span>1-year content access</span>
+        <span>6-month content access</span>
       </div>
       <div class="faq-contact">
-        <a href="#faq" id="faqTalkToMentor"><i class="fa-solid fa-phone"></i> Talk to a Mentor</a>
-        <a href="mailto:hello@aadyosh.com"><i class="fa-solid fa-envelope"></i> hello@aadyosh.com</a>
+        <a href="#faq" id="faqTalkToMentor" data-open-roadmap><i class="fa-solid fa-phone"></i> Talk to a Mentor</a>
+        <a href="mailto:hr@aadyosh.com"><i class="fa-solid fa-envelope"></i> hr@aadyosh.com</a>
       </div>
     </div>
     <div id="faqList"><!-- injected --></div>
@@ -403,8 +388,8 @@
       <h2>Ready For A Real Upskilling Journey?</h2>
       <p>You'll train on real projects, learn how to position your work, and get evaluated through a structured mentor program.</p>
       <div class="cta-actions">
-        <a href="#faq" class="btn btn-dark"><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
-        <a href="#faq" class="btn btn-ghost-light"><i class="fa-solid fa-shield-halved"></i> Need support?</a>
+        <a href="#faq" class="btn btn-dark" data-open-roadmap><i class="fa-solid fa-phone-volume"></i> Talk to a Mentor</a>
+        <a href="support.html" class="btn btn-ghost-light"><i class="fa-solid fa-shield-halved"></i> Need support?</a>
       </div>
     </div>
   </div>
@@ -434,7 +419,7 @@
           <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
         </a>
         <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
-        <div class="footer-tags"><span>Company Reg. No. — add yours</span><span>GSTIN — add yours</span></div>
+        <div class="footer-tags"><span>CIN: U62099MH2026PTC468346</span><span>GSTIN: 27ABECA9034E1ZS</span></div>
       </div>
       <div class="footer-col">
         <h5>Who we are</h5>
@@ -453,21 +438,19 @@
           <li><a href="refund-policy.html">Refunds</a></li>
           <li><a href="return-policy.html">Program Changes</a></li>
           <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
-          <li><a href="delete-account.html">Delete Account</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Contact us</h5>
         <ul class="footer-contact">
-          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
-          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
-          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hr@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val"><a href="tel:+917888209756" style="color:inherit;text-decoration:none;">+91 78882 09756</a></div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Aadyosh Corporate Private Limited, Anand Nagar, Nagpur</div></div></li>
         </ul>
         <div class="footer-social">
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.instagram.com/aadyosh/" rel="noopener noreferrer" aria-label="aadyosh on Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/110086196/" rel="noopener noreferrer" aria-label="aadyosh on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/channel/UCEqhCyXC7BdpnFsuLa2ojBw" rel="noopener noreferrer" aria-label="aadyosh on YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -592,8 +575,10 @@
   <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
 </div>
 
-<script src="assets/js/programs-data.js?v=2"></script>
-<script src="assets/js/main.js?v=18"></script>
+<script src="assets/js/programs-data.js?v=3"></script>
+<script src="assets/js/projects-data.js?v=3"></script>
+<script src="assets/js/batch.js?v=1"></script>
+<script src="assets/js/main.js?v=30"></script>
 <script src="assets/js/api.js?v=1"></script>
 <script src="assets/js/auth.js?v=5"></script>
 <script src="assets/js/tawk.js?v=2"></script>

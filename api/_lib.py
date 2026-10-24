@@ -7,6 +7,7 @@ Environment variables (set in Vercel, never committed):
     SHEETS_WEBHOOK_URL     the Apps Script /exec URL
     SHEETS_WEBHOOK_SECRET  the shared secret baked into the script
 """
+import calendar
 import json
 import os
 import re
@@ -14,7 +15,7 @@ import threading
 import time
 import urllib.request
 from collections import defaultdict, deque
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 MAX_BODY = 32 * 1024
 RATE_LIMIT = (int(os.environ.get("RATE_LIMIT", "8")), 60)  # best effort: per warm serverless instance, per IP
@@ -152,6 +153,55 @@ def forward_to_sheet(route, row):
     )
     with urllib.request.urlopen(req, timeout=25) as resp:  # Apps Script answers via a 302 that urllib follows
         return json.loads(resp.read().decode("utf-8")).get("ok") is True
+
+
+# ---------------------------------------------------------------- next batch date
+# Same rule as backend/server.py: a fixed start day every month, India time. Set BATCH_DAY (default 10) or a one-off
+# BATCH_DATE=YYYY-MM-DD in the Vercel project's environment variables.
+IST = timezone(timedelta(hours=5, minutes=30))
+MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def next_batch(now=None):
+    now = (now or datetime.now(timezone.utc)).astimezone(IST)
+
+    def payload(start, source):
+        return {"start": start.isoformat(), "date": start.date().isoformat(),
+                "label": f"{start.day:02d} {MONTH_ABBR[start.month - 1]}",
+                "days_left": max(0, (start - now).days), "source": source}
+
+    override = os.environ.get("BATCH_DATE", "").strip()
+    if override:
+        try:
+            start = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=IST)
+            if start > now:
+                return payload(start, "override")
+        except ValueError:
+            pass
+    try:
+        day = int(os.environ.get("BATCH_DAY") or 10)
+    except ValueError:
+        day = 10
+    day = min(max(day, 1), 31)
+    year, month = now.year, now.month
+    for _ in range(14):
+        start = datetime(year, month, min(day, calendar.monthrange(year, month)[1]), tzinfo=IST)
+        if start > now:
+            break
+        month += 1
+        if month > 12:
+            month, year = 1, year + 1
+    return payload(start, "monthly")
+
+
+def serve_next_batch(h):
+    out = json.dumps(next_batch()).encode("utf-8")
+    h.send_response(200)
+    h.send_header("Content-Type", "application/json; charset=utf-8")
+    h.send_header("Content-Length", str(len(out)))
+    h.send_header("Cache-Control", "public, max-age=300, s-maxage=300")  # the date only changes once a month
+    h.end_headers()
+    h.wfile.write(out)
 
 
 def serve(h, route):

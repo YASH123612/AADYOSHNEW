@@ -58,10 +58,41 @@ Vercel has no persistent disk and cannot run `backend/server.py`, so production 
       switch to a `pk_live_` key before launch (removes the "Development mode" label).
 - [ ] Before going live: host behind HTTPS; the rate limiter keys on the client IP, so behind a
       proxy it must read `X-Forwarded-For`. Keep `backend/data/` out of version control.
-- [ ] Prices, batch date (10 Oct), seat counts, ratings and the mentor "company" marquee are
-      placeholders. Replace with real figures.
-- [ ] The syllabus text for the 37 programs (`syllabus-data*.js`) is original draft content; review it.
+- [ ] Prices, seat counts, ratings and the mentor "company" marquee are placeholders. Replace with
+      real figures. (The batch date is automatic now, see "Next batch date" below.)
+- [ ] The syllabus text for the 35 programs (`syllabus-data*.js`) is original draft content; review it.
 - [ ] Optional: Sign In currently records nothing on your side (Clerk keeps users). Add a Sheet if wanted.
+
+## Projects catalogue
+
+`aadyosh/assets/js/projects-data.js` holds 105 original project briefs (3 per program: Minor, Major,
+Capstone), keyed by program slug. Format per row: `"Level | Title | What you build | Tool, Tool"`.
+The homepage Projects section searches them (title, description, program, tools), filters by domain and
+reveals 12 at a time; each card links to the program page. Program pages show that program's 3 projects.
+Add a row to the array for a slug and it appears in both places. aptisure.com has no projects section to
+mirror, so the layout is our own; the briefs are original.
+
+## Account deletion
+
+The Delete Account page was removed from the site (no footer link, no page). The Privacy Policy and
+Terms now tell users to email hr@aadyosh.com with the subject "Account Deletion Request". The page is
+still in git history (`git show HEAD:aadyosh/delete-account.html`) and the `/api/delete-request`
+endpoint, sheet and tests are unchanged, so it can be brought back by restoring that file and the footer link.
+
+## Next batch date (automatic)
+
+The "Next batch: 10 Nov" label and the countdown roll forward by themselves: the batch always starts on
+a fixed day each month (default the **10th**) at midnight India time, and after that moment the site
+shows the following month (10 Oct -> 10 Nov -> 10 Dec -> 10 Jan). Day 29-31 is clamped in short months.
+
+- `GET /api/next-batch` returns `{start, date, label, days_left, source}`. Local server: `backend/server.py`;
+  Vercel: `api/next-batch.py` (+ `api/_lib.py`), cached 5 minutes.
+- `aadyosh/assets/js/batch.js` computes the same rule locally (instant, works offline), then asks the API.
+  Anything with `data-batch-label` gets the text; countdowns listen to the `batch:update` event.
+- Change the day: env `BATCH_DAY=15` (Vercel env var or local), or `backend/data/batch.json` `{"day": 15}`.
+  One-off date (e.g. a delayed cohort): `BATCH_DATE=2026-12-01`; it is ignored once that date passes.
+  If you change the default day, also change `START_DAY` in `batch.js` (the offline fallback).
+- Tests: `python tests/test_next_batch.py` (both implementations, 25 checks).
 
 ## Conventions / gotchas
 

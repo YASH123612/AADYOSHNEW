@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/styles.css?v=78">
+<link rel="stylesheet" href="assets/css/styles.css?v=85">
 <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
 </head>
 <body>
@@ -28,11 +28,11 @@
           <div class="mega-tabs" id="megaTabs">
             <button class="mega-tab active" data-cat="cs"><i class="fa-solid fa-code"></i>Computer Science <span class="count">17</span></button>
             <button class="mega-tab" data-cat="civil"><i class="fa-solid fa-drafting-compass"></i>Civil <span class="count">1</span></button>
-            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">8</span></button>
+            <button class="mega-tab" data-cat="mgmt"><i class="fa-solid fa-briefcase"></i>Management <span class="count">6</span></button>
           </div>
           <div class="mega-grid" id="megaGrid"><!-- injected by JS --></div>
           <div class="mega-footer">
-            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Rubric evaluation · Career outcomes</span>
+            <span style="font-size:12.5px;color:var(--ink-500);font-weight:600;">Real projects · Mentor reviews · Career outcomes</span>
             <a href="index.html#programs" class="btn btn-primary btn-sm">Explore all programs</a>
           </div>
         </div>
@@ -118,7 +118,7 @@
           <img class="logo-word-img footer-word" src="assets/img/logo-wordmark.png" alt="aadyosh" />
         </a>
         <p>aadyosh helps ambitious learners upskill through mentor-led sessions, portfolio-grade projects, and outcomes built for hiring teams.</p>
-        <div class="footer-tags"><span>Company Reg. No. — add yours</span><span>GSTIN — add yours</span></div>
+        <div class="footer-tags"><span>CIN: U62099MH2026PTC468346</span><span>GSTIN: 27ABECA9034E1ZS</span></div>
       </div>
       <div class="footer-col">
         <h5>Who we are</h5>
@@ -137,21 +137,19 @@
           <li><a href="refund-policy.html">Refunds</a></li>
           <li><a href="return-policy.html">Program Changes</a></li>
           <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
-          <li><a href="delete-account.html">Delete Account</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Contact us</h5>
         <ul class="footer-contact">
-          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hello@aadyosh.com</div></div></li>
-          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val">+91 00000 00000</div></div></li>
-          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Add your office address here</div></div></li>
+          <li><i class="fa-solid fa-envelope"></i><div><div class="lbl">Email</div><div class="val">hr@aadyosh.com</div></div></li>
+          <li><i class="fa-solid fa-phone"></i><div><div class="lbl">Phone</div><div class="val"><a href="tel:+917888209756" style="color:inherit;text-decoration:none;">+91 78882 09756</a></div></div></li>
+          <li><i class="fa-solid fa-location-dot"></i><div><div class="lbl">Office</div><div class="val">Aadyosh Corporate Private Limited, Anand Nagar, Nagpur</div></div></li>
         </ul>
         <div class="footer-social">
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.instagram.com/aadyosh/" rel="noopener noreferrer" aria-label="aadyosh on Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/110086196/" rel="noopener noreferrer" aria-label="aadyosh on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/channel/UCEqhCyXC7BdpnFsuLa2ojBw" rel="noopener noreferrer" aria-label="aadyosh on YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -176,18 +174,18 @@
   <button class="chat-fab" id="chatFab" aria-label="Open chat with Ady" aria-haspopup="dialog"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span class="dot" aria-hidden="true">1</span></button>
 </div>
 
-<script src="assets/js/programs-data.js?v=2"></script>
+<script src="assets/js/programs-data.js?v=3"></script>
 <script src="assets/js/site.js?v=10"></script>
 <script>
 /* Fictional companies — see project notes: real named employers aren't used for
    unverified testimonials. Swap in real alumni + employers once available. */
 const FEATURED = [
-  { name: "Priyanka R.", role: "Software Engineer", company: "Nexora", quote: "The advanced project reviews and 1:1 mock interviews were the turning point. My mentor pushed me to optimize beyond the obvious answer, which is exactly what I got asked about in real interviews.", outcome: "Offer + rubric-scored certificate" },
+  { name: "Priyanka R.", role: "Software Engineer", company: "Nexora", quote: "The advanced project reviews and 1:1 mock interviews were the turning point. My mentor pushed me to optimize beyond the obvious answer, which is exactly what I got asked about in real interviews.", outcome: "Offer + mentor-reviewed certificate" },
   { name: "Harsha V.", role: "Software Engineer", company: "Vantage Cloud", quote: "aadyosh's full-stack curriculum isn't just tutorials — it's about building systems that hold up. The system design sessions directly helped me get through a tough final round.", outcome: "System design confidence" },
   { name: "Meera S.", role: "Software Engineer", company: "Northfield Digital", quote: "The dedicated mentor support meant I never stayed stuck for long. Their structured approach to the curriculum changed how I actually write and review code.", outcome: "Fast doubt resolution" },
 ];
 const REVIEWS = [
-  { name: "Priyanka R.", role: "Software Engineer", company: "Nexora", quote: "The advanced project reviews and 1:1 mock interviews were the turning point. My mentor pushed me to optimize beyond the obvious answer.", outcome: "Cracked interviews + rubric mastery" },
+  { name: "Priyanka R.", role: "Software Engineer", company: "Nexora", quote: "The advanced project reviews and 1:1 mock interviews were the turning point. My mentor pushed me to optimize beyond the obvious answer.", outcome: "Cracked interviews + strong projects" },
   { name: "Harsha V.", role: "Software Engineer", company: "Vantage Cloud", quote: "Aadyosh's curriculum isn't just tutorials — it's about building scalable systems. The system design sessions helped me directly.", outcome: "System design confidence + offer" },
   { name: "Meera S.", role: "Software Engineer", company: "Northfield Digital", quote: "The dedicated mentor support meant I never stayed stuck for long. Their structured approach to projects transformed how I write code.", outcome: "Fast doubt resolution + clean architecture" },
   { name: "Madhuri K.", role: "ML Intern", company: "Bluepeak", quote: "The hands-on AI/ML projects were exactly what my resume needed. During interviews, we spent real time discussing the models I actually built here.", outcome: "Industry-grade ML projects" },
@@ -195,7 +193,7 @@ const REVIEWS = [
   { name: "Kiran D.", role: "Associate Analyst", company: "Meridian Tech", quote: "The mock interviews simulated real-world pressure well. The feedback was blunt but useful — it stopped my rambling and made me interview-ready.", outcome: "Interview readiness" },
 ];
 const MORE_REVIEWS = [
-  { name: "Ananya P.", role: "Data Analyst", company: "Orbital Data", quote: "The rubric-based reviews made feedback specific instead of generic — I always knew exactly what to fix next.", outcome: "Portfolio-grade projects" },
+  { name: "Ananya P.", role: "Data Analyst", company: "Orbital Data", quote: "The mentor reviews made feedback specific instead of generic — I always knew exactly what to fix next.", outcome: "Portfolio-grade projects" },
   { name: "Rohit N.", role: "Frontend Engineer", company: "Solvix", quote: "Weekly mentor check-ins kept me accountable in a way self-paced courses never did.", outcome: "Consistent weekly progress" },
   { name: "Divya S.", role: "QA Engineer", company: "Quanta Systems", quote: "The placement support team helped me rework my resume around what recruiters actually scan for.", outcome: "Resume + LinkedIn overhaul" },
 ];

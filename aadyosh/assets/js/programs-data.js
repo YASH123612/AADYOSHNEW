@@ -45,8 +45,6 @@ const PROGRAMS = {
     { icon: "fa-solid fa-diagram-project", title: "Product Management", desc: "Discovery, roadmaps, delivery" },
     { icon: "fa-solid fa-bullhorn", title: "Business Analytics", desc: "Data-driven decision making" },
     { icon: "fa-solid fa-gears", title: "Operations Management", desc: "Process design, efficiency" },
-    { icon: "fa-solid fa-rocket", title: "Entrepreneurship & Startups", desc: "Idea to early-stage launch" },
-    { icon: "fa-solid fa-truck-fast", title: "Supply Chain Management", desc: "Logistics, sourcing, planning" },
   ],
   health: [
     { icon: "fa-solid fa-notes-medical", title: "Medical Coding", desc: "ICD-10, CPT, billing workflows" },
