@@ -1,31 +1,39 @@
 # aadyosh
 
-Marketing and enrolment site for a mentor-led, project-based bootcamp. Plain HTML/CSS/JS (no build step),
-a small Python backend for local use, and Vercel serverless functions for production.
+Marketing and enrolment site for a mentor-led, project-based bootcamp, built with **Next.js 16 (App Router), React 19 and TypeScript**.
+Forms are API routes that write straight to Google Sheets. Deploys to Vercel.
 
 ```
-aadyosh/    the website (static)
-api/        Vercel serverless form endpoints (Python) -> Google Sheets
-backend/    local server (stdlib only), Google Apps Script, tests
-tests/      tests for the Vercel endpoints
+app/            routes (pages + /api/* route handlers), global stylesheet (globals.css)
+components/     React components (header, footer, modals, forms, home sections, program page parts)
+lib/            data and logic: programs, syllabus, projects, search, next-batch date, form validation
+public/assets/  logo and technology icons
+docs/           google-apps-script.gs (the Sheets webhook)
+tests/          node:test suites for the batch-date rule and the form handler
+backend/data/   LEGACY, git-ignored: the old Python server's database and secrets (see HANDOFF.md)
 ```
 
 ## Run locally
 
 ```
-python backend/server.py        # http://127.0.0.1:5173  (Python 3.9+, nothing to install)
-python backend/test_e2e.py      # form -> database -> Google Sheets checks
-python tests/test_vercel_api.py # the Vercel endpoints
+npm install
+npm run dev        # http://localhost:5173
+npm test           # 21 checks: next-batch rule, form validation, sheet forwarding
+npm run typecheck
+npm run build && npm start
 ```
 
-## Configuration (none of this is committed)
+Forms work locally without any setup: with no Sheets webhook configured, `next dev` appends each submission to
+`.data/<form>.jsonl` (git-ignored). In production a missing webhook is reported to the visitor as a failed save.
 
-| What | Where |
+## Configuration (nothing here is committed; copy `.env.example` to `.env.local`)
+
+| Variable | What it does |
 |---|---|
-| Admin token, DB | `backend/data/` (git-ignored, created on first run) |
-| Google Sheets | deploy `backend/google-apps-script.gs` (fill in the `PASTE_...` values), then `python backend/server.py --connect <web-app-url>` |
-| Vercel | env vars `SHEETS_WEBHOOK_URL` and `SHEETS_WEBHOOK_SECRET` |
-| Clerk (sign-in) | publishable key in `aadyosh/assets/js/auth.js` (public by design; never commit the secret key) |
-| tawk.to chat | `CHAT_LINK` in `aadyosh/assets/js/tawk.js` |
+| `SHEETS_WEBHOOK_URL`, `SHEETS_WEBHOOK_SECRET` | Google Apps Script web app that appends form rows to Sheets (`docs/google-apps-script.gs`) |
+| `BATCH_DAY` / `BATCH_DATE` | optional: monthly batch start day (default 10) / one-off date `YYYY-MM-DD` |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk sign-in; defaults to the development key. Never commit the secret key |
+| `NEXT_PUBLIC_TAWK_CHAT_LINK` | tawk.to Direct Chat Link; empty = built-in "Ady" demo chat |
+| `RATE_LIMIT` | optional: form submissions per minute per IP (default 8) |
 
 See `HANDOFF.md` for status, open to-dos and conventions.

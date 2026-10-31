@@ -1,117 +1,107 @@
 # aadyosh – project handoff
 
-Ed-tech / bootcamp marketing site. Plain HTML/CSS/JS (no build step) + a small Python backend
-that serves the site and stores form submissions. Layout was inspired by aptisure.com; all copy,
-logos and syllabus text are original.
+Ed-tech / bootcamp marketing site, now a **Next.js 16 + React 19 + TypeScript** app (App Router). It was a plain
+HTML/CSS/JS site with a Python backend; the move to Next.js kept every page, section and behaviour (checked page by
+page against the old site). Layout was inspired by aptisure.com; all copy, logos and syllabus text are original.
 
 ```
-aadyosh/    the website (open pages directly, or via the server)
-backend/    server.py (stdlib only), README.md, Google Apps Script, tests, data/ (secrets + DB)
-.claude/    launch.json (preview config for Claude Code)
+app/              routes: pages, /api/[form] and /api/next-batch route handlers, globals.css (the old styles.css, unchanged)
+components/       SiteHeader, SiteFooter, ChatWidget, modals/ (roadmap + mentor pop-ups), forms/, home/, program/, pages/, auth/
+lib/              programs, program templates, projects, search, batch (next-batch rule), forms (validation + Sheets), clerk, tawk
+lib/data/         the editable content: programs.ts, syllabus.ts, project-rows.ts, program-meta.ts
+public/assets/    logo + technology icons
+docs/             google-apps-script.gs
+tests/            node:test suites (npm test)
+backend/data/     LEGACY, git-ignored: the old Python server's DB + secrets (see "Secrets")
 ```
+
+The old static site and Python backend are still in git history on `main` (commit `12f7675`).
 
 ## Run it
 
 ```
-python backend/server.py        # -> http://127.0.0.1:5173   (Python 3.9+, nothing to install)
-python backend/test_e2e.py      # 33 checks: forms -> DB -> Google Sheets (uses a throwaway DB)
+npm install
+npm run dev          # http://localhost:5173
+npm test             # 21 checks
+npm run typecheck
+npm run build        # all 51 pages prerender; API routes are dynamic
 ```
+
+Old `*.html` URLs redirect to the new routes (`/program.html?slug=x` -> `/programs/x`), see `next.config.mjs`.
 
 ## Deploying to Vercel
 
-Vercel has no persistent disk and cannot run `backend/server.py`, so production uses a different path:
+Import the GitHub repo (framework: Next.js is detected). Set these environment variables, then deploy:
 
-- `aadyosh/` is served as the static site (`vercel.json` -> `outputDirectory`).
-- `api/*.py` are serverless functions with the same four endpoints as the Python backend
-  (`/api/leads`, `/api/support`, `/api/ambassador`, `/api/delete-request`). They validate with the same
-  rules and send each submission **straight to the Google Sheets Apps Script** - Google Sheets is the
-  datastore in production. There is no SQLite and no `/api/admin/*` there; read submissions in the Sheets.
-- Two environment variables must exist in the Vercel project (never commit them):
-  `SHEETS_WEBHOOK_URL` (the Apps Script `/exec` URL, = `backend/data/sheets_webhook.txt`) and
-  `SHEETS_WEBHOOK_SECRET` (= `backend/data/sheets_secret.txt`).
-- `.vercelignore` keeps `backend/` (secrets, DB), `tests/` and `.claude/` out of the upload.
-- If Google's script is down, the form shows "couldn't save, try again" (HTTP 502) instead of a fake success.
-- Test the functions locally: `python tests/test_vercel_api.py` (27 checks, no network needed).
-- Deploy: `vercel` (preview) then `vercel --prod`. Add the Vercel domain to Clerk's allowed origins.
-- Local development is unchanged: `python backend/server.py` still works (SQLite + background Sheets sync).
+- `SHEETS_WEBHOOK_URL` and `SHEETS_WEBHOOK_SECRET` (values: `backend/data/sheets_webhook.txt` and `sheets_secret.txt`)
+- optional: `BATCH_DAY`, `BATCH_DATE`, `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_TAWK_CHAT_LINK`, `RATE_LIMIT`
+
+Vercel has no persistent disk: every valid form submission goes straight to the Google Apps Script, which appends it to
+that form's Sheet (Sheets is the datastore). If the script is down the visitor sees "couldn't save, try again" (HTTP 502),
+never a fake success. There is no SQLite and no admin API any more; read submissions in the Sheets.
+Add the Vercel domain to Clerk's allowed origins.
 
 ## Status of each integration
 
 | Part | State |
 |---|---|
-| Forms (roadmap popup, support, campus ambassador, delete account) | Working. Validated server-side, stored in `backend/data/aadyosh.db`. Glue: `aadyosh/assets/js/api.js` |
-| Google Sheets | Working. Apps Script deployed, URL in `backend/data/sheets_webhook.txt`. One Sheet per form in the Drive folder "aadyosh - form responses". Failed pushes retry automatically. Script source: `backend/google-apps-script.gs` |
-| Clerk sign-in / sign-up | Working with a **development** key (`pk_test_...` in `aadyosh/assets/js/auth.js`). Header Sign In opens a modal; `sign-in.html` shows the inline form |
-| tawk.to live chat | **Not connected.** Paste the Direct Chat Link into `CHAT_LINK` in `aadyosh/assets/js/tawk.js`. Until then the built-in "Ady" demo panel is used |
-| Admin API | `GET /api/admin/{summary,leads,support,ambassador,delete-request}` with `Authorization: Bearer <backend/data/admin_token.txt>`; add `?format=csv` for a download |
+| Forms (roadmap pop-up, mentor pop-up, support, campus ambassador) | Working. Validated server-side in `lib/forms.ts`, forwarded to Sheets. Without a webhook, `next dev` writes `.data/<form>.jsonl` |
+| Google Sheets | Apps Script deployed earlier. **Needs a redeploy** so mentor requests have a sheet: paste `backend/data/google-apps-script.filled.gs` (has the real secret + sheet IDs) and Deploy > Manage deployments > New version |
+| Clerk sign-in / sign-up | Working with a **development** key (default in `lib/clerk.ts`). Header Sign In opens a modal; `/sign-in` shows the inline form |
+| tawk.to live chat | **Not connected.** Set `NEXT_PUBLIC_TAWK_CHAT_LINK`. Until then the built-in "Ady" demo panel is used |
 
 ## Open to-dos
 
 - [ ] **Rotate the Clerk secret key** (it was pasted into a chat once). The site does not use it.
 - [ ] Delete test rows: Google Sheet "Account Deletion Requests" row 2 ("Policy Test User"), and the
-      "TEST popup to Sheets" row in the Roadmap Leads sheet + `leads` table (id 3).
-- [ ] Connect tawk.to (see above).
-- [ ] Fill every `[bracketed]` placeholder in the policy pages (company name/address, hosting and
-      payment providers, retention periods, governing law/city, grievance officer) and have a
-      lawyer review them. Same for the footer: company reg. no., GSTIN, phone, office address.
-- [ ] Clerk: rename the application from "RoadMap" to "aadyosh", add the production domain and
-      switch to a `pk_live_` key before launch (removes the "Development mode" label).
-- [ ] Before going live: host behind HTTPS; the rate limiter keys on the client IP, so behind a
-      proxy it must read `X-Forwarded-For`. Keep `backend/data/` out of version control.
-- [ ] Prices, seat counts, ratings and the mentor "company" marquee are placeholders. Replace with
-      real figures. (The batch date is automatic now, see "Next batch date" below.)
-- [ ] The syllabus text for the 35 programs (`syllabus-data*.js`) is original draft content; review it.
-- [ ] Optional: Sign In currently records nothing on your side (Clerk keeps users). Add a Sheet if wanted.
+      "TEST popup to Sheets" row in the Roadmap Leads sheet.
+- [ ] Redeploy the Apps Script (above) and set the Vercel env vars.
+- [ ] Connect tawk.to.
+- [ ] Fill the remaining `[bracketed]` placeholders in the Privacy Policy (grievance officer, hosting/payment
+      providers, retention periods) and have a lawyer review all policy pages, including the guaranteed-internship wording.
+- [ ] Clerk: rename the application from "RoadMap" to "aadyosh", add the production domain and switch to a `pk_live_`
+      key before launch (removes the "Development mode" label).
+- [ ] Prices, seat counts, ratings, testimonials and the mentor "company" marquee are placeholders. Replace with real data.
+- [ ] The syllabus text for the 35 programs (`lib/data/syllabus.ts`) is original draft content; review it.
+- [ ] Optional: Sign In records nothing on your side (Clerk keeps users). Add a Sheet if wanted.
 
-## Projects catalogue
+## Content you can edit
 
-`aadyosh/assets/js/projects-data.js` holds 105 original project briefs (3 per program: Minor, Major,
-Capstone), keyed by program slug. Format per row: `"Level | Title | What you build | Tool, Tool"`.
-The homepage Projects section searches them (title, description, program, tools), filters by domain and
-reveals 12 at a time; each card links to the program page. Program pages show that program's 3 projects.
-Add a row to the array for a slug and it appears in both places. aptisure.com has no projects section to
-mirror, so the layout is our own; the briefs are original.
-
-## Account deletion
-
-The Delete Account page was removed from the site (no footer link, no page). The Privacy Policy and
-Terms now tell users to email hr@aadyosh.com with the subject "Account Deletion Request". The page is
-still in git history (`git show HEAD:aadyosh/delete-account.html`) and the `/api/delete-request`
-endpoint, sheet and tests are unchanged, so it can be brought back by restoring that file and the footer link.
-
-## Next batch date (automatic)
-
-The "Next batch: 10 Nov" label and the countdown roll forward by themselves: the batch always starts on
-a fixed day each month (default the **10th**) at midnight India time, and after that moment the site
-shows the following month (10 Oct -> 10 Nov -> 10 Dec -> 10 Jan). Day 29-31 is clamped in short months.
-
-- `GET /api/next-batch` returns `{start, date, label, days_left, source}`. Local server: `backend/server.py`;
-  Vercel: `api/next-batch.py` (+ `api/_lib.py`), cached 5 minutes.
-- `aadyosh/assets/js/batch.js` computes the same rule locally (instant, works offline), then asks the API.
-  Anything with `data-batch-label` gets the text; countdowns listen to the `batch:update` event.
-- Change the day: env `BATCH_DAY=15` (Vercel env var or local), or `backend/data/batch.json` `{"day": 15}`.
-  One-off date (e.g. a delayed cohort): `BATCH_DATE=2026-12-01`; it is ignored once that date passes.
-  If you change the default day, also change `START_DAY` in `batch.js` (the offline fallback).
-- Tests: `python tests/test_next_batch.py` (both implementations, 25 checks).
+- Programs shown in the menu / homepage / search: `lib/data/programs.ts`. Curated program pages: `lib/data/program-meta.ts`.
+  Everything else uses the shared template in `lib/program.ts`; modules come from `lib/data/syllabus.ts`.
+- **Projects**: `lib/data/project-rows.ts` holds 105 original briefs (3 per program: Minor, Major, Capstone), one string per row:
+  `"Level | Title | What you build | Tool, Tool"`. The homepage Projects section (search, domain filter, 12 at a time) and each
+  program page read it. aptisure.com has no projects section to mirror; the layout is our own.
+- Shared copy (FAQ, reviews, contact details, social links, enrol link): `lib/content.ts`. Price/plan card: `app/page.tsx`
+  and `app/programs/[slug]/page.tsx`.
+- Next batch date: the batch starts on a fixed day each month (default the **10th**, midnight India time); after that moment the site
+  shows the next month. `GET /api/next-batch` is authoritative (honours `BATCH_DAY` and a one-off `BATCH_DATE=YYYY-MM-DD`);
+  the browser also computes the same rule locally so the date is right even on a cached page. Rule + tests: `lib/batch.ts`, `tests/batch.test.ts`.
+- Account deletion: there is no Delete Account page. The Privacy Policy and Terms tell users to email hr@aadyosh.com with the
+  subject "Account Deletion Request". The old page is in git history.
 
 ## Conventions / gotchas
 
-- Every HTML page loads assets with `?v=N` cache-busting (`styles.css` is around v67). When you change
-  a CSS/JS file, bump the number in **all** pages together. The preview server does not send
-  no-cache headers, so test with a fresh query string (e.g. `page.html?x=1`) or hard refresh.
-- `html`/`body` use `overflow-x: clip`, not `hidden`: `hidden` on both breaks the sticky header.
-  Grid/flex children need `min-width: 0` (a safety-net rule exists in `styles.css`).
-- Copilot: `copilot.html` still exists but is removed from the main nav and the features page.
+- Styles are one global stylesheet, `app/globals.css`. `html`/`body` use `overflow-x: clip`, not `hidden` (`hidden` on both breaks the
+  sticky header). Grid/flex children need `min-width: 0` (a safety-net rule exists).
+- The hero must not use `overflow: hidden` (it would clip the search dropdown); it uses `overflow-x: clip`.
+- Hydration: anything that depends on "now" (batch label, countdown, footer year) has `suppressHydrationWarning`, and the batch date is
+  corrected right after mount. The layout re-renders at most hourly (`revalidate = 3600`).
+- `components/modals/ModalProvider.tsx` owns both pop-ups. "Talk to a Mentor" buttons use `<TalkLink>` (roadmap form) or
+  `<MentorLink program domain>` (program pages).
 - Windows PowerShell 5.1: read/write files with .NET `UTF8Encoding($false)` to avoid encoding damage.
 
 ## Standing instructions from the owner
 
-- Do **not** change anything on `campus-ambassador.html` (only footer link/cache-version tweaks happened).
-- Do not copy aptisure's marketing copy, use real company logos, or claim real affiliation with
-  Google/MAANG etc. Mentor logos are labelled placeholders.
+- `/campus-ambassador` is kept exactly as it was: its content, its older header (all six domains in the menu, a Copilot link,
+  the "Rubric evaluation" tagline) and its "Return Policy" footer label. `SiteHeader` and `SiteFooter` special-case that one path.
+- Do not copy aptisure's marketing copy, use real company logos, or claim real affiliation with Google/MAANG etc.
+  Mentor logos are labelled placeholders.
 - Colour palette: purple / white / black (gradients allowed); the hero keeps its multicolour look.
+- Copilot (`/copilot`) exists but is not linked from the main nav.
 
-## Secrets in this folder
+## Secrets
 
-`backend/data/` contains `admin_token.txt`, `sheets_secret.txt`, `sheets_webhook.txt` and the database
-with real submissions. Do not share or publish that folder.
+`backend/data/` (git-ignored) still holds the old server's `admin_token.txt`, `sheets_secret.txt`, `sheets_webhook.txt`,
+`google-apps-script.filled.gs` and `aadyosh.db` with real submissions. Do not share or publish that folder; you need two of
+those files to fill in the Vercel variables.

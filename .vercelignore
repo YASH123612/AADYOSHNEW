@@ -1,6 +1,6 @@
 backend/
-tests/
+exports/
 .claude/
+.data/
 HANDOFF.md
 *.tmp
-exports/

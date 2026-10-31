@@ -1,10 +1,22 @@
-backend/data/
-.vercel/
+# dependencies and build output
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets and local data - never commit
 .env*
-__pycache__/
-*.tmp
+!.env.example
+.data/
+backend/data/
 exports/
+.vercel/
+
+# misc
+*.tmp
 *.db
 *.db-shm
 *.db-wal
-node_modules/
+__pycache__/
+.DS_Store
