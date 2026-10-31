@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Accordion } from "@/components/Accordion";
-import { CERT_TABS, FAQS, REVIEWS, STEPS } from "@/lib/content";
+import { CERT_TABS, FAQS, STEPS, TESTIMONIALS } from "@/lib/content";
 import { PROGRAMS, programHref } from "@/lib/programs";
 
 /* ---------- 5-step enrolment stepper ---------- */
@@ -119,20 +119,44 @@ export function CertPreview() {
   );
 }
 
-/* ---------- short testimonials + FAQ ---------- */
+/* ---------- marquee review cards ---------- */
+
+const ReviewCard = ({ r }: { r: typeof TESTIMONIALS[number] }) => (
+  <div className="review-card-m">
+    <div className="rcm-top">
+      <div>
+        <div className="rcm-name">{r.name}</div>
+        <div className="rcm-role">{r.role}</div>
+      </div>
+      <div className="rcm-company">{r.company}</div>
+    </div>
+    <div className="rcm-stars">{"★".repeat(5)}</div>
+    <p className="rcm-quote">&quot;{r.quote}&quot;</p>
+    <span className="rcm-outcome">{r.outcome}</span>
+  </div>
+);
+
 export function ReviewGrid() {
+  const row1 = TESTIMONIALS.slice(0, 3);
+  const row2 = TESTIMONIALS.slice(3);
+  // Duplicate each row so the seamless -50% loop works
+  const track1 = [...row1, ...row1, ...row1, ...row1];
+  const track2 = [...row2, ...row2, ...row2, ...row2];
+
   return (
-    <div className="review-grid" id="reviewGrid">
-      {REVIEWS.map((r) => (
-        <div key={r.name} className="review-card">
-          <div className="stars">{"★".repeat(5)}</div>
-          <p className="quote">&quot;{r.quote}&quot;</p>
-          <div className="review-person">
-            <div className="avatar">{r.name.split(" ").map((w) => w[0]).join("")}</div>
-            <div><div className="name">{r.name}</div><div className="role">{r.role}</div></div>
-          </div>
+    <div className="review-marquee" aria-label="Learner testimonials">
+      {/* Row 1 — scrolls left */}
+      <div className="rmq-row">
+        <div className="rmq-track rmq-ltr">
+          {track1.map((r, i) => <ReviewCard key={i} r={r} />)}
         </div>
-      ))}
+      </div>
+      {/* Row 2 — scrolls right */}
+      <div className="rmq-row">
+        <div className="rmq-track rmq-rtl">
+          {track2.map((r, i) => <ReviewCard key={i} r={r} />)}
+        </div>
+      </div>
     </div>
   );
 }

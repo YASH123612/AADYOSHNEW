@@ -2,15 +2,29 @@ import { MENTOR_BG_NAMES, PARTNER_NAMES, TECH_BUSINESS, TECH_ENGINEERING, type M
 import { TechMarqueeShell } from "./TechMarqueeShell";
 
 const MentorTile = ({ m }: { m: MentorBg }) =>
-  typeof m === "string"
-    ? <div className="logo-tile">{m}</div>
-    : <div className="logo-tile logo-tile-img"><img src={m.logo} alt={m.name} height={28} /></div>;
+  typeof m === "string" ? (
+    <div className="logo-tile">{m}</div>
+  ) : (
+    <div className="logo-tile logo-tile-img" title={m.name}>
+      <img
+        src={m.logo}
+        alt={m.name}
+        height={m.height || 26}
+        style={{ height: m.height || 26, width: "auto", maxHeight: 32, objectFit: "contain" }}
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  );
 
-/** Scrolling strip of mentor-background marks (duplicated so the loop has no seam). */
+/** Scrolling strip of mentor-background marks (duplicated 4x so the loop has no seam). */
 export function MentorLogoTrack() {
+  const track = [...MENTOR_BG_NAMES, ...MENTOR_BG_NAMES, ...MENTOR_BG_NAMES, ...MENTOR_BG_NAMES];
   return (
-    <div className="logo-marquee-track" id="mentorLogoTrack">
-      {[...MENTOR_BG_NAMES, ...MENTOR_BG_NAMES].map((m, i) => <MentorTile key={i} m={m} />)}
+    <div className="logo-marquee-track" id="mentorLogoTrack" aria-label="Mentor background companies">
+      {track.map((m, i) => (
+        <MentorTile key={typeof m === "string" ? m + i : m.name + i} m={m} />
+      ))}
     </div>
   );
 }

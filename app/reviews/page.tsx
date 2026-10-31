@@ -77,9 +77,7 @@ export default function ReviewsPage() {
         </div>
       </section>
       <section className="reviews">
-        <div className="container">
-          <TestimonialGrids />
-        </div>
+        <TestimonialGrids />
       </section>
       <section className="cta-banner">
         <div className="container">

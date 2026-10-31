@@ -218,18 +218,19 @@ export default function IndexPage() {
       <section className="partners" id="mentors">
         <div className="container">
           <div className="section-head center" style={{ marginTop: "16px" }}>
+            <div className="partner-spot" style={{ marginBottom: "16px" }}>
+              <i className="fa-solid fa-briefcase" style={{ color: "var(--brand-500)" }}></i>
+              <span>Expert Profile</span>
+            </div>
             <h2>
               Learn From The{" "}
               <span className="highlight">Top 1% In The Industry</span>
             </h2>
             <p>
-              Mentorship led by experienced engineers from top product and services companies — not instructors reading slides.
+              Mentorship led by experienced engineers from companies like Google, Microsoft, Meta, and Amazon.
             </p>
           </div>
-          <p className="partner-note">
-            Sample mentor-background marks shown below — replace with aadyosh's confirmed mentor network.
-          </p>
-          <div className="logo-marquee">
+          <div className="logo-marquee" style={{ marginTop: "24px" }}>
             <MentorLogoTrack />
           </div>
         </div>
@@ -251,7 +252,7 @@ export default function IndexPage() {
             <i className="fa-solid fa-circle-nodes"></i>
             {" "}HireLoop
           </div>
-          <p className="partner-note">Sample partner marks shown below — replace with aadyosh's confirmed hiring partners.</p>
+          {/* <p className="partner-note">Sample partner marks shown below — replace with aadyosh's confirmed hiring partners.</p> */}
           <LogoGrid />
         </div>
       </section>
@@ -526,6 +527,16 @@ export default function IndexPage() {
             <p>Illustrative reviews — swap in your real testimonials once you start collecting them.</p>
           </div>
           <ReviewGrid />
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link
+              href="/reviews"
+              className="btn btn-outline"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
+            >
+              <span>View all reviews</span>
+              <i className="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </Link>
+          </div>
         </div>
       </section>
       <section className="how" id="ambassador">

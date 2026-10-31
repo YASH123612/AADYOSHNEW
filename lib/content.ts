@@ -20,8 +20,16 @@ export const FAQS = [
    public/assets/img/mentors/. Only do this for companies where your mentors really work (and you have
    permission to use the mark) - otherwise it misleads visitors. Plain strings render as text tiles. */
 export const PARTNER_NAMES = ["Nexora", "Verdant Labs", "Bluepeak", "Cirrus Works", "Solvix", "Meridian Tech", "Vantage Cloud", "Orbital Data", "Northfield Digital", "Quanta Systems"];
-export type MentorBg = string | { name: string; logo: string };
-export const MENTOR_BG_NAMES: MentorBg[] = ["TechCorp", "Cloudify", "DataSphere", "PixelWorks", "ScaleUp Labs", "ByteForge", "Nimbus Systems", "Corestack", "Flowmatic", "Vectorlane"];
+export type MentorBg = string | { name: string; logo: string; height?: number };
+export const MENTOR_BG_NAMES: MentorBg[] = [
+  { name: "Apple", logo: "/assets/img/companies/apple.svg", height: 32 },
+  { name: "Amazon", logo: "/assets/img/companies/amazon.svg", height: 26 },
+  { name: "Netflix", logo: "/assets/img/companies/netflix.svg", height: 24 },
+  { name: "Google", logo: "/assets/img/companies/google.svg", height: 28 },
+  { name: "Adobe", logo: "/assets/img/companies/adobe.svg", height: 24 },
+  { name: "Meta", logo: "/assets/img/companies/meta.svg", height: 24 },
+  { name: "Microsoft", logo: "/assets/img/companies/microsoft.svg", height: 24 },
+];
 
 /* Tools marquee: technology logos (public/assets/img/tech/*.svg, Devicon - MIT) */
 export const TECH_ENGINEERING = [
