@@ -430,6 +430,7 @@ section { position: relative; }
 }
 .logo-marquee {
   overflow: hidden;
+  padding: 14px 0;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
@@ -439,6 +440,7 @@ section { position: relative; }
   width: max-content;
   animation: marquee 32s linear infinite;
   will-change: transform;
+  padding: 6px 0;
 }
 .logo-marquee:hover .logo-marquee-track { animation-play-state: paused; }
 .logo-marquee-track .logo-tile { flex-shrink: 0; min-width: 155px; text-align: center; }
@@ -711,9 +713,10 @@ a.proj-card:hover, a.proj-card:focus-visible { transform: translateY(-3px); bord
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
 
-/* Each row: overflow-hidden clip */
+/* Each row: overflow-hidden clip with vertical breathing room */
 .rmq-row {
   overflow: hidden;
+  padding: 8px 0;
 }
 
 /* The scrolling track — wide flex strip, never wraps */
